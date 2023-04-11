@@ -1,0 +1,35 @@
+{
+  "name": "meal-prep-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && npm run migrate && cd client && npm install && npm run build",
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "make:migration": "knex migrate:make",
+    "migrate": "knex migrate:latest",
+    "make:seed": "knex seed:make",
+    "seed": "knex seed:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaylorC19/meal-prep-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TaylorC19/meal-prep-tracker/issues"
+  },
+  "homepage": "https://github.com/TaylorC19/meal-prep-tracker#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "knex": "^2.4.2",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
