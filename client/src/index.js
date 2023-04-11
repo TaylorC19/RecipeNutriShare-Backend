@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import MyRecipes from './pages/MyRecipes';
 import NewRecipe from './pages/NewRecipe';
 import NoPage from './pages/NoPage';
-import Layout from './pages/Layout';
+// import Layout from './pages/Layout';
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
