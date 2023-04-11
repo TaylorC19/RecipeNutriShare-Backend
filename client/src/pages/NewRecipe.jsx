@@ -1,7 +1,13 @@
+import Header from '../components/Header'
 
 
 const NewRecipe = () => {
-  return <h1>New Recipe</h1>;
+  return (
+    <div>
+      <Header />
+      <h1>New Recipe</h1>
+    </div>
+  );
 }
 
 export default NewRecipe;
