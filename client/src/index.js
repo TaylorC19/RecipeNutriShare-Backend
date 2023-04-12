@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from './pages/Home';
-import MyRecipes from './pages/MyRecipes';
-import NewRecipe from './pages/NewRecipe';
-import NoPage from './pages/NoPage';
+// import Home from './pages/Home';
+// import MyRecipes from './pages/MyRecipes';
+// import NewRecipe from './pages/NewRecipe';
+// import NoPage from './pages/NoPage';
 // import Layout from './pages/Layout';
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // const router = createBrowserRouter([
 //   {
