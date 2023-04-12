@@ -1,4 +1,5 @@
 import Header from '../components/Header'
+import Ingredients from '../components/Ingredients';
 
 
 const NewRecipe = () => {
@@ -6,6 +7,9 @@ const NewRecipe = () => {
     <div>
       <Header />
       <h1>New Recipe</h1>
+      <div>
+        <Ingredients></Ingredients>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Header from "../../components/Header";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ function SignUp() {
 
   return (
     <div>
+      <Header></Header>
       <form onSubmit={handleSignUp} action="">
         <h1>Welcome New User!</h1>
         <label htmlFor="signup-email">Email</label>
