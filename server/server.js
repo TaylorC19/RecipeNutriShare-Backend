@@ -28,7 +28,7 @@ function setupServer () {
   app.post('/auth/signup', async (req, res) => {
     const { email, password } = req.body
 
-    const userCred = await createUserWithEmailAndPassword(auth, email, password)
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
     console.log(userCred);
     res.send(userCred);

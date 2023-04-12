@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -7,7 +8,10 @@ function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     //const email = e.target.
-    const userCred = await axios.post('/auth/signup' )
+    const userCred = await axios.post('/auth/signup', { 
+      email: email, 
+      password: password
+    })
     console.log(userCred);
   }
 

@@ -8,7 +8,10 @@ function SignIn() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     //const email = e.target.
-    const userCred = await axios.post('/auth/signin' )
+    const userCred = await axios.post('/auth/signin', { 
+      email: email, 
+      password: password
+    })
     console.log(userCred);
   }
 
