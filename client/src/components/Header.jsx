@@ -11,8 +11,8 @@ const Header = (props) => {
       <h1>Meal Prep Life</h1>
       <div className="navigate-items">
         <button onClick={() => navigate('/')}>Home</button>
-        <button onClick={() => navigate('/NewRecipe')}>New Recipe</button>
-        <button onClick={() => navigate('/MyRecipes')}>My Recipes</button>
+        <button onClick={() => navigate('/new-recipe')}>New Recipe</button>
+        <button onClick={() => navigate('/my-recipes')}>My Recipes</button>
       </div>
     </div>
   )

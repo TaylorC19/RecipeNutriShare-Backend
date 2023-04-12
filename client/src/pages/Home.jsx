@@ -1,5 +1,5 @@
-import SignIn from '../components/Auth/SignIn';
-import SignUp from '../components/Auth/SignUp';
+import SignIn from './Auth/SignIn';
+import SignUp from './Auth/SignUp';
 import Header from '../components/Header'
 
 
