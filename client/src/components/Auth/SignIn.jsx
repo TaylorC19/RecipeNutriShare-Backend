@@ -1,11 +1,20 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    //const email = e.target.
+    const userCred = await axios.post('/auth/signin' )
+    console.log(userCred);
+  }
+
   return (
     <div>
-      <form action="">
+      <form onSubmit={handleSignIn} action="">
         <h1>Welcome Back!</h1>
         <label htmlFor="signin-email">Email</label>
         <input
