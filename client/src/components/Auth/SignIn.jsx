@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -7,26 +7,27 @@ function SignIn() {
     <div>
       <form action="">
         <h1>Welcome Back!</h1>
-        <label htmlFor="signup-email">Email</label>
+        <label htmlFor="signin-email">Email</label>
         <input
           type="email"
-          id="signup-email"
+          id="signin-email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
           placeholder="someone@somewhere.com"
         />
-        <label htmlFor="signup-password">Password</label>
+        <label htmlFor="signin-password">Password</label>
         <input
           type="password"
-          id="signup-password"
+          id="signin-password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           placeholder="password"
         />
+        <button type="submit">Sign in!</button>
       </form>
     </div>
   );

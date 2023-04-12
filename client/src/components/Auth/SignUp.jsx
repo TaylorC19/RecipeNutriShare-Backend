@@ -27,6 +27,7 @@ function SignUp() {
           }}
           placeholder="password"
         />
+        <button type="submit">Sign up!</button>
       </form>
     </div>
   );
