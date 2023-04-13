@@ -7,9 +7,10 @@ const NewRecipe = () => {
     <div>
       <Header />
       <h1>New Recipe</h1>
-      <div>
+      <form>
         <Ingredients></Ingredients>
-      </div>
+        {/* <Info></Info> */}
+      </form>
     </div>
   );
 }

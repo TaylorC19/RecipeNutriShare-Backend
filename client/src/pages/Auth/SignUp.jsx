@@ -2,19 +2,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import { UserAuth } from "../../components/context/AuthContext";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { createUser } = UserAuth();
+
   const handleSignUp = async (e) => {
     e.preventDefault();
-    //const email = e.target.
-    const userCred = await axios.post('/auth/signup', { 
-      email: email, 
-      password: password
-    })
-    console.log(userCred);
+
+    try {
+      const userCred = await createUser(email, password);
+      console.log(userCred);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

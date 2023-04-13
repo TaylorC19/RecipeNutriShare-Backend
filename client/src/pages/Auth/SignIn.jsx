@@ -1,26 +1,38 @@
-import axios from 'axios';
+//import axios from 'axios';
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import { UserAuth } from '../../components/context/AuthContext';
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = async (e) => {
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   //const email = e.target.
+  //   const userCred = await axios.post('/auth/signin', { 
+  //     email: email, 
+  //     password: password
+  //   })
+  //   console.log(userCred);
+  // }
+
+  const { loginUser } = UserAuth();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    //const email = e.target.
-    const userCred = await axios.post('/auth/signin', { 
-      email: email, 
-      password: password
-    })
-    console.log(userCred);
-  }
+    try {
+      loginUser(email, password);
+    } catch (error) {
+      console.error(error);
+    }
+  } 
 
   return (
     <div>
       <Header></Header>
-      <form onSubmit={handleSignIn} action="">
+      <form onSubmit={handleLogin} action="">
         <h1>Welcome Back!</h1>
         <label htmlFor="signin-email">Email</label>
         <input
