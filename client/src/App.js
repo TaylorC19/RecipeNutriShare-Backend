@@ -6,6 +6,7 @@ import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./components/context/AuthContext";
+import NewUser from "./pages/NewUser";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/new-user" element={<NewUser />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/my-recipes" element={<MyRecipes />}></Route>
