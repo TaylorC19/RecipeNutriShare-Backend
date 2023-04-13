@@ -1,6 +1,7 @@
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
 import Header from '../components/Header'
+import Footer from '../components/Footer';
 
 
 const Home = () => {
@@ -11,6 +12,8 @@ const Home = () => {
 
       <SignUp />
       <SignIn />
+
+      <Footer text='© 2023 Meal Prep Tracker' />
     </div>
   );
 }
