@@ -1,29 +1,20 @@
 //import axios from 'axios';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import { UserAuth } from '../../components/context/AuthContext';
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // const handleSignIn = async (e) => {
-  //   e.preventDefault();
-  //   //const email = e.target.
-  //   const userCred = await axios.post('/auth/signin', { 
-  //     email: email, 
-  //     password: password
-  //   })
-  //   console.log(userCred);
-  // }
-
+  const navigate = useNavigate();
   const { loginUser } = UserAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      loginUser(email, password);
+      await loginUser(email, password);
+      navigate('/')
     } catch (error) {
       console.error(error);
     }
