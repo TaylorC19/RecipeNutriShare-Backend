@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { signOut, onAuthStateChanged } from "firebase/auth";
+
 import { auth } from '../../firebase/firebase'
 
 const UserContext = createContext();
@@ -8,12 +9,12 @@ const UserContext = createContext();
 export const AuthContextProvider = ({children}) => {
   const [user, setUser] = useState({})
 
-  useEffect(() => {
-    const authenticatedUser = onAuthStateChanged(auth, (currentUser) => {
-      console.log(authenticatedUser)
-      setUser(currentUser)
-    })
-  }, [user])
+  // useEffect(() => {
+  //   const authenticatedUser = onAuthStateChanged(auth, (currentUser) => {
+  //     console.log(authenticatedUser)
+  //     setUser(currentUser)
+  //   })
+  // }, [])
 
   const createUser = async (email, password) => {
     const userCred = await axios.post('/auth/signup', { 
