@@ -30,11 +30,15 @@ export const AuthContextProvider = ({children}) => {
     return userCred.data;
   }
 
+  const logOut = async () => {
+    return axios.post('/auth/signout').data
+  }
+
   const testAuth = () => {
     console.log('testing')
   }
 
-  return <UserContext.Provider value={{createUser, loginUser, testAuth, user}}>
+  return <UserContext.Provider value={{createUser, loginUser, testAuth, logOut, user}}>
     {children}
   </UserContext.Provider>
 }

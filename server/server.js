@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const auth = require('./firebase/firebase');
-const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('firebase/auth');
-// const db = require('../db/index');
+const { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } = require('firebase/auth');
+const db = require('../db/knex');
 
 function setupServer () {
   const app = express();
@@ -21,7 +21,7 @@ function setupServer () {
 
     const userCred = await signInWithEmailAndPassword(auth, email, password)
 
-    console.log(userCred);
+    //console.log(userCred);
     res.send(userCred);
   })
 
@@ -30,8 +30,14 @@ function setupServer () {
 
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
-    console.log(userCred);
+    //console.log(userCred);
     res.send(userCred);
+  })
+
+  app.post('/auth/signout', async (req, res) => {
+    const signedout = signOut(auth);
+
+    res.send(signedout);
   })
 
   return app;
