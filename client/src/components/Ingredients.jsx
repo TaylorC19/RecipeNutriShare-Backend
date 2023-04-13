@@ -3,22 +3,26 @@ import IngredientRow from "./IngredientRow";
 
 function Ingredients() {
   const [ingredientArr, setIngredientsArr] = useState([
-    <IngredientRow />
+    'element0'
   ]);
 
   const newIngredientHandler = (e) => {
     e.preventDefault();
-    setIngredientsArr([...ingredientArr, <IngredientRow />])
+    setIngredientsArr([...ingredientArr, `element${ingredientArr.length}`])
   };
 
   return (
     <div>
       <form id="ingredients" action="">
         {ingredientArr.map((row, index) => {
-          return row
+          return (<IngredientRow key={index} />)
         })}
-      </form>
       <button onClick={newIngredientHandler}>add one more ingredient</button>
+      <button onClick={(e) => {
+        e.preventDefault();
+        console.log(e.target.form);
+      }} type="submit">Submit recipes</button>
+      </form>
     </div>
   );
 }
