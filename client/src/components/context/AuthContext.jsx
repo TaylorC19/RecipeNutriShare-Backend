@@ -54,15 +54,18 @@ export const AuthContextProvider = ({ children }) => {
       password: password,
     });
 
+    setUser(userCred.data);
+    
     return userCred.data;
   };
-
+  
   const loginUser = async (email, password) => {
     const userCred = await axios.post("/auth/signin", {
       email: email,
       password: password,
     });
-
+    
+    setUser(userCred.data);
     return userCred.data;
   };
 
