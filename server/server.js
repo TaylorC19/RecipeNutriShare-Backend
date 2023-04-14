@@ -16,6 +16,10 @@ function setupServer () {
     res.send('world');
   });
 
+  app.get('/auth/get-auth', (req, res) => {
+    res.send(auth);
+  })
+
   app.post('/auth/signin', async (req, res) => {
     const { email, password } = req.body
 
