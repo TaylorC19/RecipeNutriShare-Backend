@@ -1,28 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import IngredientRow from "./IngredientRow";
 
-function Ingredients() {
-  const [ingredientArr, setIngredientsArr] = useState([
-    'element0'
-  ]);
+function Ingredients(props) {
+  const { ingredientsArr, setIngredientsArr } = props;
 
   const newIngredientHandler = (e) => {
     e.preventDefault();
-    setIngredientsArr([...ingredientArr, `element${ingredientArr.length}`])
+    setIngredientsArr([...ingredientsArr, {name:'', quantity: '', unit: ''}])
   };
 
   return (
     <div>
-      <form id="ingredients" action="">
-        {ingredientArr.map((row, index) => {
-          return (<IngredientRow key={index} />)
+      <div className="ingredient-container">
+        {ingredientsArr.map((row, index) => {
+          return (<IngredientRow key={index} ingredientsArr={ingredientsArr} setIngredientsArr={setIngredientsArr} index={index} />)
         })}
       <button onClick={newIngredientHandler}>add one more ingredient</button>
-      <button onClick={(e) => {
-        e.preventDefault();
-        console.log(e.target.form);
-      }} type="submit">Submit recipes</button>
-      </form>
+      </div>
     </div>
   );
 }

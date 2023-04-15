@@ -1,45 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 
-function IngredientRow() {
-  const [item, setItem] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [unit, setUnit] = useState("grams");
+function IngredientRow(props) {
+  const { ingredientsArr, setIngredientsArr, index } = props;
+
+
+  const handleName = (e) => {
+    const inputData = [...ingredientsArr]
+    inputData[index]['name'] = e.target.value;
+    setIngredientsArr(inputData); 
+  }
+
+  const handleQuantity = (e) => {
+    const inputData = [...ingredientsArr]
+    inputData[index]['quantity'] = Number(e.target.value);
+    setIngredientsArr(inputData); 
+  }
+
+  const handleUnit = (e) => {
+    const inputData = [...ingredientsArr]
+    inputData[index]['unit'] = e.target.value;
+    setIngredientsArr(inputData); 
+  }
 
   return (
     <div className="one-item">
       <input
-        value={item}
-        onChange={(e) => {
-          setItem(e.target.value);
-        }}
+        value={ingredientsArr[index]['name']}
+        onChange={handleName}
         type="text"
         placeholder="item"
       />
       <input
-        value={quantity}
-        onChange={(e) => {
-          setQuantity(e.target.value);
-        }}
+        value={ingredientsArr[index]['quantity']}
+        onChange={handleQuantity}
         type="text"
         className="quantity"
-        placeholder="quantity"
+        placeholder="quantity (Number)"
       />
-      <select
-        value={unit}
-        onChange={(e) => {
-          setUnit(e.target.value);
-        }}
-        name="types"
-        id="units"
-      >
-        <option value="grams">grams</option>
-        <option value="small">small</option>
-        <option value="medium">medium</option>
-        <option value="large">large</option>
-      </select>
+      <input
+        value={ingredientsArr[index]['unit']}
+        onChange={handleUnit}
+        type="text"
+        className="quantity"
+        placeholder="units (large, grams, ounces, etc.)"
+      />
       <button onClick={(e) => {
         e.preventDefault();
-        console.log(item, quantity, unit)
+        console.log(ingredientsArr)
       }}>test</button>
     </div>
   );
