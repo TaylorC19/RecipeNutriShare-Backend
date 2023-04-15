@@ -12,6 +12,7 @@ const Home = () => {
 
   const handleLogOut = async () => {
     try {
+      console.log('user', user);
       await logOut(); 
       navigate('/signin')
     } catch (error) {

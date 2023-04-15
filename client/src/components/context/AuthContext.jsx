@@ -8,7 +8,7 @@ const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [auth, setAuth] = useState({});
+  // const [auth, setAuth] = useState({});
 
 // this part gets the auth credentials in the first on
   // useEffect( () => {
@@ -65,13 +65,13 @@ export const AuthContextProvider = ({ children }) => {
       password: password,
     });
     
-    setUser(userCred.data);
+    setUser(userCred.data); 
     return userCred.data;
   };
 
-  const logOut = async () => {
-    await signOut(auth);
-  };
+  // const logOut = async () => {
+  //   await signOut(auth);
+  // };
 
   const testAuth = () => {
     console.log("testing");
@@ -79,7 +79,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ createUser, loginUser, testAuth, logOut, user }}
+      value={{ createUser, loginUser, testAuth, user }}
     >
       {children}
     </UserContext.Provider>
