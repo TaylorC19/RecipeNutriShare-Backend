@@ -4,9 +4,19 @@ import './Header.css'
 import { UserAuth } from "./context/AuthContext";
 
 const Header = () => {
-  const {user} = UserAuth();
+  const {user, logOut} = UserAuth();
   
   const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    try {
+      console.log('user', user);
+      await logOut(); 
+      navigate('/')
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return(
     <div className="header-div">
@@ -17,6 +27,7 @@ const Header = () => {
         <button onClick={() => navigate('/')}>Home</button>
         <button onClick={() => navigate('/new-recipe')}>New Recipe</button>
         <button onClick={() => navigate('/my-recipes')}>My Recipes</button>
+        <button onClick={handleLogOut}>Log Out</button>
       </div> 
       :
       <div className="navigate-items">

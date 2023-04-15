@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
+import Footer from "../../components/Footer";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -49,6 +50,7 @@ function SignUp() {
         <button type="submit">Sign up!</button>
       </form>
       <p>Already have an account? Sign in <Link to='/signin'>here</Link>.</p>
+      <Footer></Footer>
     </div>
   );
 }

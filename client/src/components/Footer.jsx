@@ -10,4 +10,8 @@ function Footer(props) {
   )
 }
 
+Footer.defaultProps = {
+  text: "© 2023 Meal Prep Tracker"
+}
+
 export default Footer

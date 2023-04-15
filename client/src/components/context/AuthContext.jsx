@@ -69,9 +69,9 @@ export const AuthContextProvider = ({ children }) => {
     return userCred.data;
   };
 
-  // const logOut = async () => {
-  //   await signOut(auth);
-  // };
+  const logOut =  () => {
+    setUser({});
+  };
 
   const testAuth = () => {
     console.log("testing");
@@ -79,7 +79,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ createUser, loginUser, testAuth, user }}
+      value={{ createUser, loginUser, testAuth, logOut, user }}
     >
       {children}
     </UserContext.Provider>
