@@ -24,9 +24,9 @@ function App() {
             </ProtectedRoute>
           }></Route>
           <Route path="/new-recipe" element={
-            <ProtectedRoute>
+            // <ProtectedRoute> // removed for testing
               <NewRecipe />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }></Route>
         </Routes>
       </AuthContextProvider>

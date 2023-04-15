@@ -1,4 +1,5 @@
 import React from "react";
+import './IngredientRow.css'
 
 function IngredientRow(props) {
   const { ingredientsArr, setIngredientsArr, index } = props;
@@ -28,6 +29,7 @@ function IngredientRow(props) {
         value={ingredientsArr[index]['name']}
         onChange={handleName}
         type="text"
+        className="name"
         placeholder="item"
       />
       <input
@@ -41,13 +43,9 @@ function IngredientRow(props) {
         value={ingredientsArr[index]['unit']}
         onChange={handleUnit}
         type="text"
-        className="quantity"
+        className="unit"
         placeholder="units (large, grams, ounces, etc.)"
       />
-      <button onClick={(e) => {
-        e.preventDefault();
-        console.log(ingredientsArr)
-      }}>test</button>
     </div>
   );
 }

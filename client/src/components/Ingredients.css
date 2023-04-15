@@ -1,0 +1,11 @@
+.ingredient-container {
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+  padding: 10px;
+}
+.column-titles {
+  display: flex;
+  justify-content: space-between;
+
+}

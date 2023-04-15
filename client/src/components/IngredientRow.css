@@ -1,0 +1,16 @@
+.one-item {
+  display: flex;
+
+}
+
+.name {
+  width: 125px;
+}
+
+.quantity {
+  width: 50px;
+}
+
+.unit {
+  width: 125px;
+}

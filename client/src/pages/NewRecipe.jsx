@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../components/Header'
 import Ingredients from '../components/Ingredients';
+import RecipeInfo from '../components/RecipeInfo';
+import "./NewRecipe.css"
 
 
 const NewRecipe = () => {
-  const [ingredientsArr, setIngredientsArr] = useState([{name:'', quantity: 0, unit: ''}])
+  const [ingredientsArr, setIngredientsArr] = useState([{name:'', quantity: '', unit: ''}])
   const [recipeInfo, setRecipeInfo] = useState({});
   
   const handleSubmit = (e) => {
@@ -22,8 +24,10 @@ const NewRecipe = () => {
       <Header />
       <h1>New Recipe</h1>
       <form onSubmit={handleSubmit}>
+        <div className='form-container'>
         <Ingredients ingredientsArr={ingredientsArr} setIngredientsArr={setIngredientsArr}></Ingredients>
-        {/* <Info></Info> */}
+        <RecipeInfo recipeInfo={recipeInfo} setRecipeInfo={setRecipeInfo}></RecipeInfo>
+        </div>
         <button type="submit">Submit new recipe</button>
       </form>
     </div>
