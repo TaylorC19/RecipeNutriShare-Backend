@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const auth = require('./firebase/firebase');
 const { signInWithEmailAndPassword, createUserWithEmailAndPassword } = require('firebase/auth');
-const db = require('../db/knex');
+const knex = require('../db/knex');
 
 function setupServer () {
   const app = express();
@@ -32,10 +32,23 @@ function setupServer () {
   app.post('/auth/signup', async (req, res) => {
     const { email, password } = req.body
 
-    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+  
+      console.log(userCred);
 
-    //console.log(userCred);
-    res.send(userCred);
+      const uid = userCred.user.uid;
+
+      console.log(uid);
+  
+      await knex('users').insert({'uid': uid})
+      //console.log(userCred);
+      res.send(userCred);
+      
+    } catch (error) {
+      console.log(error);
+      res.send(false);
+    }
   })
 
   return app;
