@@ -15,6 +15,7 @@ const NewRecipe = () => {
     minutes: "",
     description: "",
     instructions: "",
+    is_public: false
   });
 
   const handleSubmit = (e) => {
