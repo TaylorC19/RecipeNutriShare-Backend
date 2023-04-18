@@ -1,6 +1,6 @@
 .one-item {
   display: flex;
-
+  margin: 5px 0px;
 }
 
 .name {

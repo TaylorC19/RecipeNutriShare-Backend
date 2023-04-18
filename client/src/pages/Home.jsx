@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
+  console.log(user);
 
   const handleLogOut = async () => {
     try {

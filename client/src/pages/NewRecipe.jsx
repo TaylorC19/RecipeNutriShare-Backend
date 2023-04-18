@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Ingredients from "../components/Ingredients";
 import RecipeInfo from "../components/RecipeInfo";
 import "./NewRecipe.css";
+import { UserAuth } from "../components/context/AuthContext";
 
 const NewRecipe = () => {
   const [ingredientsArr, setIngredientsArr] = useState([
@@ -17,6 +18,7 @@ const NewRecipe = () => {
     instructions: "",
     is_public: false
   });
+  const { user } = UserAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,14 +26,20 @@ const NewRecipe = () => {
       let string = `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}`;
       return string;
     });
-    const ingredientsStr = ingredientsArr2.join(",");
-    console.log(ingredientsStr);
+    const ingredientsStr = ingredientsArr2.join(", ");
+    const queryBody = {
+      query: ingredientsStr,
+      uid: user.user.uid,
+      recipeInfo: recipeInfo 
+    };
+    console.log(queryBody);
   };
 
   return (
     <div>
       <Header />
       <h1>New Recipe</h1>
+      <p> hello\nuser</p>
       <form onSubmit={handleSubmit}>
         <div className="form-container">
           <Ingredients

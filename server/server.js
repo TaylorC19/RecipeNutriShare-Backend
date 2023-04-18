@@ -38,8 +38,21 @@ function setupServer() {
     // res.send(nutritionInfo.data);
 
     const nutritionInfo = await nutrition(ingredients, apiHeader);
-
+    
     res.send(nutritionInfo);
+  });
+  
+  app.post("/api/recipe", async (req, res) => {
+    const {uid, query, recipeInfo} = req.body;
+    const requestQuery = {
+      query: query
+    }
+    
+    const nutritionInfo = await nutrition(requestQuery, apiHeader);
+
+    
+
+    res.send([uid, nutritionInfo, recipeInfo]);
   });
 
   app.post("/auth/signin", async (req, res) => {
