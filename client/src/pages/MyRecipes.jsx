@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { UserAuth } from '../components/context/AuthContext';
 import axios from 'axios';
+import RecipeCard from '../components/RecipeCard';
 
 
 const MyRecipes = () => {
@@ -9,15 +10,17 @@ const MyRecipes = () => {
   const { user } = UserAuth();
 
   useEffect(()=>{
-    const getRecipes = async() => {
-      const userRecipes = await axios.get(`/api/recipes/${user.user.uid}`);
+    const getRecipes = async () => {
+      const userRecipes = await axios.get(`/api/recipes/${user.user.uid}`)
+        .then(results => results.data);
       console.log(userRecipes);
-      return userRecipes;
+      setMyRecipes(userRecipes)
+      return 'allGood';
     }
 
-    const yourRecipes = getRecipes();
+    getRecipes();
 
-    setMyRecipes(yourRecipes);
+    // setMyRecipes(yourRecipes);
   },[])
 
   useEffect(() => {
@@ -28,6 +31,10 @@ const MyRecipes = () => {
     <div>
       <Header />
       <h1>Your Recipes</h1>
+      {// console.log(myRecipes);
+      myRecipes.map((recipe, index) => {
+        return <RecipeCard recipeInfo={recipe} key={index} />
+      })}
 
     </div>
   );
