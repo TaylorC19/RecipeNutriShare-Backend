@@ -47,25 +47,40 @@ function setupServer() {
     const requestQuery = {
       query: query
     }
-    
-    const nutritionInfo = await nutrition(requestQuery, apiHeader);
 
-    const newRecipe = {
-      user_uid: uid,
-      ...recipeInfo,
-      ingredients: JSON.stringify(nutritionInfo.ingredientsArr),
-      total_calories: nutritionInfo.nutritionObj.totalCalories,
-      total_protein: nutritionInfo.nutritionObj.totalProtein,
-      total_carbohydrates: nutritionInfo.nutritionObj.totalCarbohydrates,
-      calories_per_serving: nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings
+    try {
+      const nutritionInfo = await nutrition(requestQuery, apiHeader);
+  
+      const newRecipe = {
+        user_uid: uid,
+        ...recipeInfo,
+        ingredients: JSON.stringify(nutritionInfo.ingredientsArr),
+        total_calories: nutritionInfo.nutritionObj.totalCalories,
+        total_protein: nutritionInfo.nutritionObj.totalProtein,
+        total_carbohydrates: nutritionInfo.nutritionObj.totalCarbohydrates,
+        calories_per_serving: nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings
+      }
+  
+      const writeRecipe = await knex('recipes')
+        .insert(newRecipe);
+  
+      console.log(writeRecipe)
+      res.send(newRecipe);
+      
+    } catch (error) {
+      console.error(error);
+      res.status(400).send(false)
     }
-
-    const writeRecipe = await knex('recipes')
-      .insert(newRecipe);
-
-    console.log(writeRecipe)
-    res.send(newRecipe);
+    
   });
+
+  app.get('/api/recipes', async (req, res) => {
+    const uid = req.body.uid;
+console.log(uid)
+    const myRecipes = await knex('recipes').select().where('user_uid', uid);
+
+    res.send(myRecipes);
+  })
 
   app.post("/auth/signin", async (req, res) => {
     const { email, password } = req.body;
