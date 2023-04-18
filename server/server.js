@@ -50,9 +50,21 @@ function setupServer() {
     
     const nutritionInfo = await nutrition(requestQuery, apiHeader);
 
-    
+    const newRecipe = {
+      user_uid: uid,
+      ...recipeInfo,
+      ingredients: JSON.stringify(nutritionInfo.ingredientsArr),
+      total_calories: nutritionInfo.nutritionObj.totalCalories,
+      total_protein: nutritionInfo.nutritionObj.totalProtein,
+      total_carbohydrates: nutritionInfo.nutritionObj.totalCarbohydrates,
+      calories_per_serving: nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings
+    }
 
-    res.send([uid, nutritionInfo, recipeInfo]);
+    const writeRecipe = await knex('recipes')
+      .insert(newRecipe);
+
+    console.log(writeRecipe)
+    res.send(newRecipe);
   });
 
   app.post("/auth/signin", async (req, res) => {
