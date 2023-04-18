@@ -42,19 +42,19 @@ function RecipeInfo(props) {
   };
 
   const handleDesciption = (e) => {
-    const inputData = { ...recipeInfo }; // how do you handle new lines "/n" when saving and displaying text?
+    const inputData = { ...recipeInfo }; 
     inputData.description = e.target.value;
     setRecipeInfo(inputData);
   };
 
   const handleInstructions = (e) => {
-    const inputData = { ...recipeInfo }; // how do you handle new lines "/n" when saving and displaying text?
+    const inputData = { ...recipeInfo }; 
     inputData.instructions = e.target.value;
     setRecipeInfo(inputData);
   };
 
   const handleIsPublic = (e) => {
-    const inputData = { ...recipeInfo }; // how do you handle new lines "/n" when saving and displaying text?
+    const inputData = { ...recipeInfo }; 
     inputData.is_public = !(inputData.is_public);
     setRecipeInfo(inputData);
   };

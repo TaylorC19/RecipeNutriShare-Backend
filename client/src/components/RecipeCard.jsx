@@ -6,7 +6,7 @@ function RecipeCard(props) {
   return (
     <div className='recipe-card'>
       <h2>{title}</h2>
-      <p>{servings}</p>
+      <p>servings:{servings}</p>
       <p>CookTime {hours}:{minutes}</p>
       <p>Calories per serving: {calories}</p>
       <p>{description}</p>

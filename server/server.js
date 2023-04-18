@@ -74,9 +74,9 @@ function setupServer() {
     
   });
 
-  app.get('/api/recipes', async (req, res) => {
-    const uid = req.body.uid;
-console.log(uid)
+  app.get('/api/recipes/:uid', async (req, res) => {
+    const uid = req.params.uid;
+
     const myRecipes = await knex('recipes').select().where('user_uid', uid);
 
     res.send(myRecipes);

@@ -6,19 +6,19 @@ function IngredientRow(props) {
 
 
   const handleName = (e) => {
-    const inputData = [...ingredientsArr]
+    const inputData = [...ingredientsArr];
     inputData[index]['name'] = e.target.value;
-    setIngredientsArr(inputData); 
+    setIngredientsArr(inputData);
   }
 
   const handleQuantity = (e) => {
-    const inputData = [...ingredientsArr]
+    const inputData = [...ingredientsArr];
     inputData[index]['quantity'] = Number(e.target.value);
     setIngredientsArr(inputData); 
   }
 
   const handleUnit = (e) => {
-    const inputData = [...ingredientsArr]
+    const inputData = [...ingredientsArr];
     inputData[index]['unit'] = e.target.value;
     setIngredientsArr(inputData); 
   }
