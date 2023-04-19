@@ -7,6 +7,7 @@ import SignUp from "./pages/Auth/SignUp";
 import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./components/context/AuthContext";
 import NewUser from "./pages/NewUser";
+import PublicRecipes from "./pages/PublicRecipes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedRouteSignIn from "./components/ProtectedRouteSignIn";
 
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/new-user" element={<NewUser />}></Route>
+          <Route path="/public-recipes" element={<PublicRecipes />}></Route>
           <Route path="/signup" element={
             <ProtectedRouteSignIn>
               <SignUp />
