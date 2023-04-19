@@ -2,7 +2,7 @@ import React from 'react';
 import "./RecipeCard.css"
 
 function RecipeCard(props) {
-  const { recipeInfo } = props;
+  const { recipeInfo, setSingleRecipe, index, setIsDefaultView } = props;
   return (
     <div className='recipe-card'>
       <h2>{recipeInfo.title}</h2>
@@ -15,6 +15,12 @@ function RecipeCard(props) {
 
       </div>
       <p>Description: {recipeInfo.description}</p>
+
+      <button onClick={(e) => {
+        e.preventDefault();
+        setSingleRecipe(recipeInfo);
+        setIsDefaultView(false);
+      }}>More info</button>
     </div>
   )
 }
