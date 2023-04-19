@@ -17,7 +17,6 @@ const MyRecipes = () => {
       const userRecipes = await axios
         .get(`/api/recipes/${user.user.uid}`)
         .then((results) => results.data);
-      console.log(userRecipes);
       setMyRecipes(userRecipes);
       return "allGood";
     };
@@ -26,10 +25,6 @@ const MyRecipes = () => {
 
     // setMyRecipes(yourRecipes);
   }, []);
-
-  useEffect(() => {
-    console.log(myRecipes);
-  }, [myRecipes]);
 
   return (
     <div>
@@ -48,7 +43,10 @@ const MyRecipes = () => {
           );
         })
       ) : (
-        <SingleRecipe singleRecipe={singleRecipe}></SingleRecipe>
+        <SingleRecipe
+          setIsDefaultView={setIsDefaultView}
+          singleRecipe={singleRecipe}
+        ></SingleRecipe>
       )}
     </div>
   );

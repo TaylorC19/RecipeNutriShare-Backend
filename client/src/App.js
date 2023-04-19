@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { AuthContextProvider } from "./components/context/AuthContext";
 import NewUser from "./pages/NewUser";
 import ProtectedRoute from "./components/ProtectedRoute";
-import ProtectedRouteSignIn from "./components/ProtectedRoute copy";
+import ProtectedRouteSignIn from "./components/ProtectedRouteSignIn";
 
 function App() {
   return (
