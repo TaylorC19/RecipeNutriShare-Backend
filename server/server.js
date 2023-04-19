@@ -7,7 +7,10 @@ const {
 } = require("firebase/auth");
 const knex = require("../db/knex");
 const axios = require("axios");
-const nutrition = require('./utils/nutrition-api')
+const nutrition = require("./utils/nutrition-api");
+
+//routes
+const authRouter = require("./routes/user-auth");
 
 const apiHeader = {
   "x-app-id": process.env.X_APP_ID,
@@ -21,6 +24,9 @@ function setupServer() {
 
   app.use(express.json());
   app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+  //routes
+  app.use("/auth", authRouter);
 
   // Add endpoints here
 
@@ -38,19 +44,19 @@ function setupServer() {
     // res.send(nutritionInfo.data);
 
     const nutritionInfo = await nutrition(ingredients, apiHeader);
-    
+
     res.send(nutritionInfo);
   });
-  
+
   app.post("/api/recipe", async (req, res) => {
-    const {uid, query, recipeInfo} = req.body;
+    const { uid, query, recipeInfo } = req.body;
     const requestQuery = {
-      query: query
-    }
+      query: query,
+    };
 
     try {
       const nutritionInfo = await nutrition(requestQuery, apiHeader);
-  
+
       const newRecipe = {
         user_uid: uid,
         ...recipeInfo,
@@ -58,62 +64,38 @@ function setupServer() {
         total_calories: nutritionInfo.nutritionObj.totalCalories,
         total_protein: nutritionInfo.nutritionObj.totalProtein,
         total_carbohydrates: nutritionInfo.nutritionObj.totalCarbohydrates,
-        calories_per_serving: nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings
-      }
-  
-      const writeRecipe = await knex('recipes')
-        .insert(newRecipe);
-  
-      console.log(writeRecipe)
+        calories_per_serving:
+          nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings,
+      };
+
+      const writeRecipe = await knex("recipes").insert(newRecipe);
+
+      console.log(writeRecipe);
       res.send(newRecipe);
-      
     } catch (error) {
       console.error(error);
-      res.status(400).send(false)
+      res.status(400).send(false);
     }
-    
   });
 
-  app.get('/api/recipes/:uid', async (req, res) => {
+  app.get("/api/recipes/:uid", async (req, res) => {
     const uid = req.params.uid;
 
-    const myRecipes = await knex('recipes').select().where('user_uid', uid);
+    const myRecipes = await knex("recipes")
+      .select()
+      .where("user_uid", uid)
+      .orderBy('id', 'desc');
 
     res.send(myRecipes);
-  })
-
-  app.post("/auth/signin", async (req, res) => {
-    const { email, password } = req.body;
-
-    const userCred = await signInWithEmailAndPassword(auth, email, password);
-
-    //console.log(userCred);
-    res.send(userCred);
   });
 
-  app.post("/auth/signup", async (req, res) => {
-    const { email, password } = req.body;
+  app.get("/api/public-recipes", async (req, res) => {
+    const myRecipes = await knex("recipes")
+      .select()
+      .where("is_public", true)
+      .orderBy('id', 'desc');
 
-    try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      console.log(userCred);
-
-      const uid = userCred.user.uid;
-
-      console.log(uid);
-
-      await knex("users").insert({ uid: uid });
-      //console.log(userCred);
-      res.send(userCred);
-    } catch (error) {
-      console.log(error);
-      res.send(false);
-    }
+    res.send(myRecipes);
   });
 
   return app;
