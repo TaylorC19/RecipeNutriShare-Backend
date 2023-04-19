@@ -3,12 +3,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SingleRecipe from "../components/SingleRecipe";
 import { UserAuth } from "../components/context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
   const { user, logOut } = UserAuth();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [singleRecipe, setSingleRecipe] = useState({
     ingredients: [],
     instructions: "",
