@@ -8,6 +8,7 @@ const {
 const knex = require("../db/knex");
 const axios = require("axios");
 const nutrition = require("./utils/nutrition-api");
+const getRandomItem = require("./utils/getRandomItem");
 
 //routes
 const authRouter = require("./routes/user-auth");
@@ -90,12 +91,23 @@ function setupServer() {
   });
 
   app.get("/api/public-recipes", async (req, res) => {
-    const myRecipes = await knex("recipes")
+    const publicRecipes = await knex("recipes")
       .select()
       .where("is_public", true)
       .orderBy('id', 'desc');
 
-    res.send(myRecipes);
+    res.send(publicRecipes);
+  });
+
+  app.get("/api/random-recipe", async (req, res) => {
+    const publicRecipes = await knex("recipes")
+      .select()
+      .where("is_public", true)
+      .orderBy('id', 'desc');
+
+    const highlight = getRandomItem(publicRecipes);
+
+    res.send(highlight);
   });
 
   return app;

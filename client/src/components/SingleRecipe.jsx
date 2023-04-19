@@ -1,8 +1,10 @@
 import React from "react";
 import "./SingleRecipe.css";
+import { useNavigate } from "react-router-dom";
 
 function SingleRecipe(props) {
   const { singleRecipe, setIsDefaultView } = props;
+  const navigate = useNavigate();
   // console.log(singleRecipe);
   return (
     <div className="contents">
@@ -49,15 +51,25 @@ function SingleRecipe(props) {
           })}
         </div>
       </div>
-
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setIsDefaultView(true);
-        }}
-      >
-        Back to all recipes
-      </button>
+      {setIsDefaultView ? (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsDefaultView(true);
+          }}
+        >
+          Back to all recipes
+        </button>
+      ) : (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/public-recipes");
+          }}
+        >
+          Checkout all recipes
+        </button>
+      )}
     </div>
   );
 }
