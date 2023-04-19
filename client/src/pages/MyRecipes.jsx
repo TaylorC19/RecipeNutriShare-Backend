@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
@@ -13,18 +14,17 @@ const MyRecipes = () => {
   const { user } = UserAuth();
 
   useEffect(() => {
-    const getRecipes = async () => {
+    (async function () {
       const userRecipes = await axios
         .get(`/api/recipes/${user.user.uid}`)
         .then((results) => results.data);
       setMyRecipes(userRecipes);
       return "allGood";
-    };
-
-    getRecipes();
-
-    // setMyRecipes(yourRecipes);
-  }, []);
+    })()
+    // console.log('useEffect is running')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // getRecipes();
+  }, [user.user.uid]); 
 
   return (
     <div>
@@ -49,6 +49,7 @@ const MyRecipes = () => {
           singleRecipe={singleRecipe}
         ></SingleRecipe>
       )}
+      <Footer></Footer>
     </div>
   );
 };

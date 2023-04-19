@@ -1,11 +1,20 @@
 import React from "react";
+import "./SingleRecipe.css";
 
 function SingleRecipe(props) {
   const { singleRecipe, setIsDefaultView } = props;
   console.log(singleRecipe);
   return (
-    <div>
-      <h2>{singleRecipe.title}</h2>
+    <div className="contents">
+      <h2>Title: {singleRecipe.title}</h2>
+      <div className="nutrition-info">
+      <p>servings:{singleRecipe.servings}</p>
+        <p>Calories: {singleRecipe.total_calories}</p>
+        <p>CookTime: {singleRecipe.hours ? singleRecipe.hours : 0} hour(s) and {singleRecipe.minutes? singleRecipe.minutes : 0} minute(s)</p>
+        <p>Calories per serving: {singleRecipe.calories_per_serving}</p>
+        <p>Protein per serving: {singleRecipe.total_protein / singleRecipe.servings}</p>
+        <p>Carbohydrates per serving: {singleRecipe.total_carbohydrates / singleRecipe.servings}</p>
+      </div>
       <div className="full-recipe">
         <div className="ingredients">
           <p>Ingredients</p>
@@ -18,6 +27,7 @@ function SingleRecipe(props) {
 
         <div className="recipe-info">
           <p>{singleRecipe.description}</p>
+          <p><strong>instructions</strong></p>
           {singleRecipe.instructions.split('\n').map((element) =>{ 
             return <p>{element}</p>
           })}

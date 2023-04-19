@@ -1,0 +1,22 @@
+.contents {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.contents h2 {
+  margin: 5px 0;
+}
+
+.nutrition-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.full-recipe {
+  display: flex;
+
+}
+
+.ingredients {
+  margin-right: 25px;
+}

@@ -32,25 +32,33 @@ const NewRecipe = () => {
       });
       const ingredientsStr = ingredientsArr2.join(", ");
       
-      if (recipeInfo.hours === '') {
-        console.log('hit replace hours')
-        const updateHours = { ...recipeInfo };
-        updateHours.hours = 0;
-        setRecipeInfo(updateHours);
-      }
-      if (recipeInfo.minutes === '') {
-        const updateMinutes = { ...recipeInfo };
-        updateMinutes.minutes = 0;
-        setRecipeInfo(updateMinutes);
-      }
-  
+      const recipePayload = {
+        title: recipeInfo.title,
+        servings: recipeInfo.servings || 1,
+        hours: recipeInfo.hours || 0,
+        minutes: recipeInfo.minutes || 0,
+        description: recipeInfo.description,
+        instructions: recipeInfo.instructions,
+        is_public: recipeInfo.is_public
+      };
+      
+      // if (recipeCopy.hours === '') {
+      //   recipeCopy.hours = 0;
+      // }
+      // if (recipeCopy.minutes === '') {
+      //   updateMinutes.minutes = 0;
+      //   setRecipeInfo(updateMinutes);
+      // }
+      
+      setRecipeInfo(recipePayload);
+
       const queryBody = {
         query: ingredientsStr,
         uid: user.user.uid,
-        recipeInfo: recipeInfo 
+        recipeInfo: recipePayload 
       };
   
-      const recipeSubmission = await axios.post('/api/recipe', queryBody);
+      await axios.post('/api/recipe', queryBody);
       
       setIsSubmitted(true);
     } catch (error) {
