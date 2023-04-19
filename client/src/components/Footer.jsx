@@ -6,6 +6,10 @@ function Footer(props) {
   return (
     <div className='footer-div'>
       <p>{text}</p>
+      <div>
+        <p>Powered by:</p>
+        <a href="https://www.nutritionix.com/"><img src="https://developer.nutritionix.com/assets/nutritionix_api.png" alt="Nutritionix API" /></a>
+      </div>
     </div>
   )
 }
