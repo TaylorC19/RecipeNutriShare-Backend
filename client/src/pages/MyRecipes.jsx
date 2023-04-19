@@ -30,7 +30,8 @@ const MyRecipes = () => {
     <div>
       <Header />
       <h1>Your Recipes</h1>
-      {isDefaultView ? (
+      {isDefaultView ? 
+      (
         myRecipes.map((recipe, index) => {
           return (
             <RecipeCard
