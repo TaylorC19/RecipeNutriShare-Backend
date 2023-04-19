@@ -10,6 +10,12 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   // const [auth, setAuth] = useState({});
 
+  useEffect(() => {
+    if (JSON.parse(sessionStorage.getItem('user_info'))) {
+      setUser(JSON.parse(sessionStorage.getItem('user_info')));
+    }
+  }, [])
+
 // this part gets the auth credentials in the first on
   // useEffect( () => {
   //   async function getAuth() {
@@ -55,6 +61,8 @@ export const AuthContextProvider = ({ children }) => {
     });
 
     setUser(userCred.data);
+
+    sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
     
     return userCred.data;
   };
@@ -66,11 +74,14 @@ export const AuthContextProvider = ({ children }) => {
     });
     
     setUser(userCred.data); 
+    sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
+
     return userCred.data;
   };
 
   const logOut =  () => {
     setUser({});
+    sessionStorage.removeItem('user_info');
   };
 
   const testAuth = () => {
