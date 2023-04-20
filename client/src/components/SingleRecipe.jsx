@@ -1,11 +1,13 @@
 import React from "react";
 import "./SingleRecipe.css";
 import { useNavigate } from "react-router-dom";
+import { UserAuth } from "./context/AuthContext";
 
 function SingleRecipe(props) {
   const { singleRecipe, setIsDefaultView } = props;
   const navigate = useNavigate();
-  // console.log(singleRecipe);
+  const { user } = UserAuth();
+  console.log(singleRecipe);
   return (
     <div className="contents">
       <h2>Title: {singleRecipe.title}</h2>
@@ -52,23 +54,32 @@ function SingleRecipe(props) {
         </div>
       </div>
       {setIsDefaultView ? (
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setIsDefaultView(true);
-          }}
-        >
-          Back to all recipes
-        </button>
+        <div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsDefaultView(true);
+            }}
+          >
+            Back to all recipes
+          </button>
+          {/* {user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
+            <button>Delete</button>
+          ) : (
+            <></>
+          )} */}
+        </div>
       ) : (
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/public-recipes");
-          }}
-        >
-          Checkout all recipes
-        </button>
+        <div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/public-recipes");
+            }}
+          >
+            Checkout all recipes
+          </button>
+        </div>
       )}
     </div>
   );

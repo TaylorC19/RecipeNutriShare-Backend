@@ -110,6 +110,10 @@ function setupServer() {
     res.send(highlight);
   });
 
+  app.delete("/api/delete-recipe/user/:uid/recipe/:recipeid", async (req, res) => {
+    
+  })
+
   return app;
 }
 
