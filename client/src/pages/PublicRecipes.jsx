@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import SingleRecipe from "../components/SingleRecipe";
+import './PublicRecipes.css';
 
 function PublicRecipes() {
   const [publicRecipes, setPublicRecipes] = useState([]);
@@ -17,35 +18,36 @@ function PublicRecipes() {
         .then((results) => results.data);
       setPublicRecipes(userRecipes);
       return "allGood";
-    })()
-  }, []); 
+    })();
+  }, []);
 
   return (
     <div>
       <Header />
       <h1>Public Recipes</h1>
-      {isDefaultView ? 
-      (
-        publicRecipes.map((recipe, index) => {
-          return (
-            <RecipeCard
-              recipeInfo={recipe}
-              key={index}
-              index={index}
-              setSingleRecipe={setSingleRecipe}
-              setIsDefaultView={setIsDefaultView}
-            />
-          );
-        })
-      ) : (
-        <SingleRecipe
-          setIsDefaultView={setIsDefaultView}
-          singleRecipe={singleRecipe}
-        ></SingleRecipe>
-      )}
+      <div className="recipe-contents-div">
+        {isDefaultView ? (
+          publicRecipes.map((recipe, index) => {
+            return (
+              <RecipeCard
+                recipeInfo={recipe}
+                key={index}
+                index={index}
+                setSingleRecipe={setSingleRecipe}
+                setIsDefaultView={setIsDefaultView}
+              />
+            );
+          })
+        ) : (
+          <SingleRecipe
+            setIsDefaultView={setIsDefaultView}
+            singleRecipe={singleRecipe}
+          ></SingleRecipe>
+        )}
+      </div>
       <Footer></Footer>
     </div>
   );
-};
+}
 
-export default PublicRecipes
+export default PublicRecipes;

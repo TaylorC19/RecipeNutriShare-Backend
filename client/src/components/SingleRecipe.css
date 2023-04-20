@@ -1,6 +1,6 @@
 .contents {
-  margin-left: 15%;
-  margin-right: 15%;
+  /* margin-left: 15%;
+  margin-right: 15%; */
 }
 
 .contents h2 {
@@ -10,6 +10,7 @@
 .nutrition-info {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
 }
 
 .full-recipe {

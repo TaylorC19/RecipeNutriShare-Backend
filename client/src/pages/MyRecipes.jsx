@@ -20,35 +20,37 @@ const MyRecipes = () => {
         .then((results) => results.data);
       setMyRecipes(userRecipes);
       return "allGood";
-    })()
+    })();
     // console.log('useEffect is running')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // getRecipes();
-  }, [user.user.uid]); 
+  }, [user.user.uid]);
 
   return (
     <div>
       <Header />
       <h1>Your Recipes</h1>
-      {isDefaultView ? 
-      (
-        myRecipes.map((recipe, index) => {
-          return (
-            <RecipeCard
-              recipeInfo={recipe}
-              key={index}
-              index={index}
-              setSingleRecipe={setSingleRecipe}
-              setIsDefaultView={setIsDefaultView}
-            />
-          );
-        })
-      ) : (
-        <SingleRecipe
-          setIsDefaultView={setIsDefaultView}
-          singleRecipe={singleRecipe}
-        ></SingleRecipe>
-      )}
+
+      <div className="recipe-contents-div">
+        {isDefaultView ? (
+          myRecipes.map((recipe, index) => {
+            return (
+              <RecipeCard
+                recipeInfo={recipe}
+                key={index}
+                index={index}
+                setSingleRecipe={setSingleRecipe}
+                setIsDefaultView={setIsDefaultView}
+              />
+            );
+          })
+        ) : (
+          <SingleRecipe
+            setIsDefaultView={setIsDefaultView}
+            singleRecipe={singleRecipe}
+          ></SingleRecipe>
+        )}
+      </div>
       <Footer></Footer>
     </div>
   );

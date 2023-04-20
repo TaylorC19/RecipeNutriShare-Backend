@@ -14,10 +14,17 @@ router.get('/hello', (req, res) => {
 router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
-  const userCred = await signInWithEmailAndPassword(auth, email, password);
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+  
+    //console.log(userCred);
+    res.send(userCred);
+    
+  } catch (error) {
+    console.log(error);
+    res.send(false);
+  }
 
-  //console.log(userCred);
-  res.send(userCred);
 });
 
 router.post("/signup", async (req, res) => {

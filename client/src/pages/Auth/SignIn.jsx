@@ -9,13 +9,16 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { loginUser } = UserAuth();
+  const { user, loginUser } = UserAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await loginUser(email, password);
-      navigate('/')
+      if (Object.keys(user).length !== 0) {
+        navigate('/')
+
+      }
     } catch (error) {
       console.error(error);
     }

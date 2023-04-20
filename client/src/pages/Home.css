@@ -1,0 +1,16 @@
+.home-contents {
+  margin: 0 15%;
+}
+
+.information-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.information-grid img {
+  width: 100%;
+}
+
+ul {
+  padding-left: 20px;
+}

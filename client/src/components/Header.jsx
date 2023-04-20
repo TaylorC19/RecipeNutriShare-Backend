@@ -32,6 +32,7 @@ const Header = () => {
       </div> 
       :
       <div className="navigate-items">
+        <button onClick={() => navigate('/')}>Home</button>
         <button onClick={() => navigate('/public-recipes')}>Browse public recipes</button>
         <button onClick={() => navigate('/signin')}>Sign In</button>
         <button onClick={() => navigate('/signup')}>Sign Up</button>
