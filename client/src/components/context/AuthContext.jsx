@@ -20,15 +20,17 @@ export const AuthContextProvider = ({ children }) => {
     const userCred = await axios.post("/auth/signup", {
       email: email,
       password: password,
-    });
+    })
+      .then(result => result.data);
 
     if (userCred) {
-      setUser(userCred.data);
+      setUser(userCred);
   
       sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
 
-      return userCred.data;
+      return userCred;
     } else {
+      alert("Could not create an account, check you email and password and try again.");
       return false;
     }
 
@@ -39,15 +41,18 @@ export const AuthContextProvider = ({ children }) => {
     const userCred = await axios.post("/auth/signin", {
       email: email,
       password: password,
-    });
+    })
+      .then(result => result.data);
+    console.log(userCred)
 
     if (userCred) {
-      setUser(userCred.data); 
+      setUser(userCred); 
       sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
   
-      return userCred.data;
+      return userCred;
 
     } else {
+      alert("Could not sign in, please check your email and password and try again.");
       return false;
     }
     

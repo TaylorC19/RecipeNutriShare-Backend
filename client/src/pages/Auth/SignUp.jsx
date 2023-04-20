@@ -16,11 +16,13 @@ function SignUp() {
 
     try {
       await createUser(email, password);
-      navigate('/')
+      if (Object.keys(user).length !== 0) {
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div>
@@ -49,7 +51,9 @@ function SignUp() {
         />
         <button type="submit">Sign up!</button>
       </form>
-      <p>Already have an account? Sign in <Link to='/signin'>here</Link>.</p>
+      <p>
+        Already have an account? Sign in <Link to="/signin">here</Link>.
+      </p>
       <Footer></Footer>
     </div>
   );

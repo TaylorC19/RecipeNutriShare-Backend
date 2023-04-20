@@ -1,9 +1,9 @@
 //import axios from 'axios';
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
-import { UserAuth } from '../../components/context/AuthContext';
-import Footer from '../../components/Footer';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import { UserAuth } from "../../components/context/AuthContext";
+import Footer from "../../components/Footer";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -16,13 +16,12 @@ function SignIn() {
     try {
       await loginUser(email, password);
       if (Object.keys(user).length !== 0) {
-        navigate('/')
-
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
     }
-  } 
+  };
 
   return (
     <div>
@@ -51,10 +50,12 @@ function SignIn() {
         />
         <button type="submit">Sign in!</button>
       </form>
-      <p>New? <Link to='/signup'>Sign Up</Link></p>
+      <p>
+        New? <Link to="/signup">Sign Up</Link>
+      </p>
       <Footer></Footer>
     </div>
   );
 }
 
-export default SignIn
+export default SignIn;
