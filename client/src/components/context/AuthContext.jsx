@@ -22,11 +22,17 @@ export const AuthContextProvider = ({ children }) => {
       password: password,
     });
 
-    setUser(userCred.data);
+    if (userCred) {
+      setUser(userCred.data);
+  
+      sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
 
-    sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
+      return userCred.data;
+    } else {
+      return false;
+    }
+
     
-    return userCred.data;
   };
   
   const loginUser = async (email, password) => {
@@ -34,11 +40,17 @@ export const AuthContextProvider = ({ children }) => {
       email: email,
       password: password,
     });
-    
-    setUser(userCred.data); 
-    sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
 
-    return userCred.data;
+    if (userCred) {
+      setUser(userCred.data); 
+      sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
+  
+      return userCred.data;
+
+    } else {
+      return false;
+    }
+    
   };
 
   const logOut =  () => {
@@ -46,13 +58,9 @@ export const AuthContextProvider = ({ children }) => {
     sessionStorage.removeItem('user_info');
   };
 
-  const testAuth = () => {
-    console.log("testing");
-  };
-
   return (
     <UserContext.Provider
-      value={{ createUser, loginUser, testAuth, logOut, user }}
+      value={{ createUser, loginUser, logOut, user }}
     >
       {children}
     </UserContext.Provider>
