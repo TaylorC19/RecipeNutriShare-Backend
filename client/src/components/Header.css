@@ -4,12 +4,14 @@
   align-items: center;
   background-color: aqua;
   margin: 0;
-  height: 75px;
+  height: 100%;
 }
 
 .header-div h1 {
   margin: 0;
   margin-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .header-div button {

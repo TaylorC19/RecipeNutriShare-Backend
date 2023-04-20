@@ -14,3 +14,11 @@
 ul {
   padding-left: 20px;
 }
+
+@media screen and (max-width: 500px) {
+  .information-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
+}

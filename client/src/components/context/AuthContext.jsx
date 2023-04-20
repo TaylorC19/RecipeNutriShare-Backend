@@ -11,9 +11,15 @@ export const AuthContextProvider = ({ children }) => {
   // const [auth, setAuth] = useState({});
 
   useEffect(() => {
-    if (JSON.parse(sessionStorage.getItem('user_info'))) {
+    try {
       setUser(JSON.parse(sessionStorage.getItem('user_info')));
+      
+    } catch (error) {
+      
     }
+    // if (JSON.parse(sessionStorage.getItem('user_info'))) {
+    //   setUser(JSON.parse(sessionStorage.getItem('user_info')));
+    // }
   }, [])
 
   const createUser = async (email, password) => {
