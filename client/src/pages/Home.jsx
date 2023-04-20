@@ -48,6 +48,25 @@ const Home = () => {
           <button onClick={handleLogOut}>Logout</button>
         )}
 
+        <div className="about-div">
+          <h2>What do we do?</h2>
+          <div className="about-row">
+            <div className="about-text">
+              <p>
+                Whether you're cooking for a family of four or are just try to take
+                better of yourself, it is important to know what you are putting into your body. 
+              </p>
+
+              <p>With this app, you can focus on the cooking, and we will provide you the nutrition information you need to take care of yourself and everyone you are cooking for.</p>
+
+            </div>
+            <img
+              src="https://static-prod.adweek.com/wp-content/uploads/2020/06/cooking-at-home-CONTENT-2020.jpg"
+              alt="a family cooking"
+            />
+          </div>
+        </div>
+
         <div className="Information">
           <h2>Why use this app?</h2>
           <div className="information-grid">
@@ -62,14 +81,23 @@ const Home = () => {
               <ul>
                 <li>Perfect for browsing recipes or creating your own.</li>
                 <li>Create your own library of delicious meals.</li>
-                <li>Get the information you need to focus on the important part, the food!</li>
+                <li>
+                  Get the information you need to focus on the important part,
+                  the food!
+                </li>
               </ul>
             </div>
             <div>
               <h3>Reliable</h3>
               <ul>
-                <li>Powered by nutritionix to provide nutritionist verified information.</li>
-                <li>With this information, you can take your health into your own hands.</li>
+                <li>
+                  Powered by nutritionix to provide nutritionist verified
+                  information.
+                </li>
+                <li>
+                  With this information, you can take your health into your own
+                  hands.
+                </li>
               </ul>
             </div>
             <div>

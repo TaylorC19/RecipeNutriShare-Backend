@@ -7,6 +7,17 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.about-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+/* .about-row img {
+  width: 50%;
+  float: left
+} */
+
 .information-grid img {
   width: 100%;
 }
