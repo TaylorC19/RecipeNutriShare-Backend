@@ -12,10 +12,12 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      setUser(JSON.parse(sessionStorage.getItem('user_info')));
+      if(sessionStorage.getItem('user_info')) {
+        setUser(JSON.parse(sessionStorage.getItem('user_info')));
+      }
       
     } catch (error) {
-      
+      console.log('no user')
     }
     // if (JSON.parse(sessionStorage.getItem('user_info'))) {
     //   setUser(JSON.parse(sessionStorage.getItem('user_info')));

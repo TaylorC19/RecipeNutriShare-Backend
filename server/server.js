@@ -85,7 +85,7 @@ function setupServer() {
     const myRecipes = await knex("recipes")
       .select()
       .where("user_uid", uid)
-      .orderBy('id', 'desc');
+      .orderBy("id", "desc");
 
     res.send(myRecipes);
   });
@@ -94,7 +94,7 @@ function setupServer() {
     const publicRecipes = await knex("recipes")
       .select()
       .where("is_public", true)
-      .orderBy('id', 'desc');
+      .orderBy("id", "desc");
 
     res.send(publicRecipes);
   });
@@ -103,16 +103,28 @@ function setupServer() {
     const publicRecipes = await knex("recipes")
       .select()
       .where("is_public", true)
-      .orderBy('id', 'desc');
+      .orderBy("id", "desc");
 
     const highlight = getRandomItem(publicRecipes);
 
     res.send(highlight);
   });
 
-  app.delete("/api/delete-recipe/user/:uid/recipe/:recipeid", async (req, res) => {
-    
-  })
+  app.delete(
+    "/api/delete-recipe/user/:uid/recipe/:recipeid",
+    async (req, res) => {
+      const { uid, recipeid } = req.params;
+
+      try {
+        await knex("recipes").where({ user_uid: uid, id: recipeid }).del();
+
+        res.send(true);
+      } catch (error) {
+        console.log(error);
+        res.status(500).send(false);
+      }
+    }
+  );
 
   return app;
 }

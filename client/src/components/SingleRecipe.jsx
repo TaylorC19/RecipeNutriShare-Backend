@@ -2,6 +2,7 @@ import React from "react";
 import "./SingleRecipe.css";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
+import axios from "axios";
 
 function SingleRecipe(props) {
   const { singleRecipe, setIsDefaultView } = props;
@@ -63,11 +64,29 @@ function SingleRecipe(props) {
           >
             Back to all recipes
           </button>
-          {/* {user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
-            <button>Delete</button>
+          {user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
+            <button
+              onClick={async (e) => {
+                e.preventDefault();
+                try {
+                  const request = await axios.delete(
+                    `/api/delete-recipe/user/${user.user.uid}/recipe/${singleRecipe.id}`
+                  );
+                  if (request) {
+                    navigate("/");
+                  } else {
+                    alert("Recipe could not be deleted.");
+                  }
+                } catch (error) {
+                  alert("Recipe could not be deleted.");
+                }
+              }}
+            >
+              Delete
+            </button>
           ) : (
             <></>
-          )} */}
+          )}
         </div>
       ) : (
         <div>
