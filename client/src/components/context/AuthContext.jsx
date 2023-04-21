@@ -1,14 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { signOut, onAuthStateChanged } from "firebase/auth";
-
-// import { auth } from '../../firebase/firebase'
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  // const [auth, setAuth] = useState({});
 
   useEffect(() => {
     try {

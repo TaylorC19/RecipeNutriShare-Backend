@@ -2,7 +2,7 @@ import React from 'react';
 import "./RecipeCard.css"
 
 function RecipeCard(props) {
-  const { recipeInfo, setSingleRecipe, index, setIsDefaultView } = props;
+  const { recipeInfo, setSingleRecipe, setIsDefaultView } = props;
   return (
     <div className='recipe-card'>
       <h2>{recipeInfo.title}</h2>
