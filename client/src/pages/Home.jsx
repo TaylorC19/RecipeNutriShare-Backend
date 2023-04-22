@@ -42,7 +42,7 @@ const Home = () => {
         <h1>Welcome!</h1>
         <p>Current User: {(user.user && user.user.email) || "None"}</p>
         {Object.keys(user).length === 0 ? (
-          <p>Please sign in</p>
+          <p>Please sign in or sign up!</p>
         ) : (
           <button onClick={handleLogOut}>Logout</button>
         )}

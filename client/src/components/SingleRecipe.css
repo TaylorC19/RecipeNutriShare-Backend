@@ -1,6 +1,6 @@
-.contents {
-  /* margin-left: 15%;
-  margin-right: 15%; */
+.contents{
+  display: flex;
+  flex-direction: column;
 }
 
 .contents h2 {
@@ -13,6 +13,10 @@
   gap: 5px;
 }
 
+.nutrition-info p {
+  margin: 0 0 10px 0;
+}
+
 .full-recipe {
   display: flex;
 
@@ -20,4 +24,29 @@
 
 .ingredients {
   margin-right: 25px;
+}
+
+.single-ingredient {
+  margin-bottom: 10px;
+}
+
+.instructions-p {
+  margin: 0 0 5px 0;
+}
+
+@media screen and (max-width: 500px) {
+  .nutrition-info {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  
+  .contents{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .full-recipe {
+    display: flex;
+    flex-direction: column;
+  }
 }

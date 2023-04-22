@@ -71,7 +71,7 @@ const NewRecipe = () => {
     <div>
       <Header />
       {isSubmitted ?
-        (<h2>Thank you for submitting a recipe</h2>) :
+        (<h2>Thank you for submitting a recipe, checkout "My Recipes" to see it.</h2>) :
       ( <div>
       <h1>New Recipe</h1>
       <form onSubmit={handleSubmit}>

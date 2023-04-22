@@ -15,24 +15,24 @@ function SingleRecipe(props) {
       <h2>Title: {singleRecipe.title}</h2>
       <div className="nutrition-info">
         <p>Servings:{singleRecipe.servings}</p>
-        <p>Calories: {singleRecipe.total_calories}</p>
+        <p>Total calories: {singleRecipe.total_calories}</p>
         <p>
-          CookTime: {singleRecipe.hours ? singleRecipe.hours : 0} hour(s) and{" "}
+          Cook Time: {singleRecipe.hours ? singleRecipe.hours : 0} hour(s) and{" "}
           {singleRecipe.minutes ? singleRecipe.minutes : 0} minute(s)
         </p>
-        <p>Calories per serving: {singleRecipe.calories_per_serving}</p>
+      </div>
+      <h4>Nutrition Information (per serving)</h4>
+      <div className="nutrition-info">
+        <p>Calories: {singleRecipe.calories_per_serving}</p>
+        <p>Protein: {singleRecipe.total_protein / singleRecipe.servings}</p>
         <p>
-          Protein per serving:{" "}
-          {singleRecipe.total_protein / singleRecipe.servings}
-        </p>
-        <p>
-          Carbohydrates per serving:{" "}
+          Carbohydrates:{" "}
           {singleRecipe.total_carbohydrates / singleRecipe.servings}
         </p>
       </div>
       <div className="full-recipe">
         <div className="ingredients">
-          <p>Ingredients</p>
+          <p>Ingredients:</p>
           <ul>
             {singleRecipe.ingredients.map((ingredient) => {
               return (
@@ -46,12 +46,12 @@ function SingleRecipe(props) {
         </div>
 
         <div className="recipe-info">
-          <p>{singleRecipe.description}</p>
+          <p>Description: {singleRecipe.description}</p>
           <p>
-            <strong>instructions</strong>
+            Instructions:
           </p>
           {singleRecipe.instructions.split("\n").map((element) => {
-            return <p>{element}</p>;
+            return <p className="instructions-p">{element}</p>;
           })}
         </div>
       </div>
@@ -65,11 +65,12 @@ function SingleRecipe(props) {
           >
             Back to all recipes
           </button>
-          { (user.user !== undefined && user.user.uid === singleRecipe.user_uid) ? ( // button to delete a recipe
+          {user.user !== undefined &&
+          user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
               onClick={async (e) => {
                 e.preventDefault();
-                if(user) {
+                if (user) {
                   try {
                     const request = await axios.delete(
                       `/api/delete-recipe/user/${user.user.uid}/recipe/${singleRecipe.id}`
@@ -82,7 +83,6 @@ function SingleRecipe(props) {
                   } catch (error) {
                     alert("Recipe could not be deleted.");
                   }
-
                 }
               }}
             >
