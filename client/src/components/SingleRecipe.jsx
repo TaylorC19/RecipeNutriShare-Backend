@@ -47,9 +47,7 @@ function SingleRecipe(props) {
 
         <div className="recipe-info">
           <p>Description: {singleRecipe.description}</p>
-          <p>
-            Instructions:
-          </p>
+          <p>Instructions:</p>
           {singleRecipe.instructions.split("\n").map((element) => {
             return <p className="instructions-p">{element}</p>;
           })}
@@ -72,13 +70,19 @@ function SingleRecipe(props) {
                 e.preventDefault();
                 if (user) {
                   try {
-                    const request = await axios.delete(
-                      `/api/delete-recipe/user/${user.user.uid}/recipe/${singleRecipe.id}`
-                    );
-                    if (request) {
-                      navigate("/");
-                    } else {
-                      alert("Recipe could not be deleted.");
+                    if (
+                      window.confirm(
+                        "Are you sure you want to delete this recipe?"
+                      )
+                    ) {
+                      const request = await axios.delete(
+                        `/api/delete-recipe/user/${user.user.uid}/recipe/${singleRecipe.id}`
+                      );
+                      if (request) {
+                        navigate("/my-recipes");
+                      } else {
+                        alert("Recipe could not be deleted.");
+                      }
                     }
                   } catch (error) {
                     alert("Recipe could not be deleted.");
