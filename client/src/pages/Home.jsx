@@ -14,6 +14,7 @@ const Home = () => {
     ingredients: [],
     instructions: "",
   });
+  const [moreInfo, setMoreInfo] = useState(false);
 
   useEffect(() => {
     const getHighlight = async () => {
@@ -39,9 +40,7 @@ const Home = () => {
       <Header />
       <div className="home-contents">
         <h1>Welcome!</h1>
-        <p>
-          Current User: {(user.user && user.user.email) || "No user detected"}
-        </p>
+        <p>Current User: {(user.user && user.user.email) || "None"}</p>
         {Object.keys(user).length === 0 ? (
           <p>Please sign in</p>
         ) : (
@@ -53,12 +52,16 @@ const Home = () => {
           <div className="about-row">
             <div className="about-text">
               <p>
-                Whether you're cooking for a family of four or are just try to take
-                better of yourself, it is important to know what you are putting into your body. 
+                Whether you're cooking for a family of four or are just trying to
+                take better of yourself, it is important to know what you are
+                putting into your body.
               </p>
 
-              <p>With this app, you can focus on the cooking, and we will provide you the nutrition information you need to take care of yourself and everyone you are cooking for.</p>
-
+              <p>
+                With this app, you can focus on the cooking, and we will provide
+                you the nutrition information you need to take care of yourself
+                and everyone you are cooking for.
+              </p>
             </div>
             <img
               src="https://static-prod.adweek.com/wp-content/uploads/2020/06/cooking-at-home-CONTENT-2020.jpg"
@@ -80,7 +83,7 @@ const Home = () => {
               <h3>Easy to use</h3>
               <ul>
                 <li>Perfect for browsing recipes or creating your own.</li>
-                <li>Create your own library of delicious meals.</li>
+                <li>Create your own recipebook of delicious meals.</li>
                 <li>
                   Get the information you need to focus on the important part,
                   the food!
@@ -113,7 +116,22 @@ const Home = () => {
 
         <div className="highlight-div">
           <h2>Highlighted Recipe</h2>
-          <SingleRecipe singleRecipe={singleRecipe}></SingleRecipe>
+          {!moreInfo ? (
+            <div>
+              <h3>Title: {singleRecipe.title}</h3>
+              <p>{singleRecipe.description}</p>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMoreInfo(true);
+                }}
+              >
+                See more
+              </button>
+            </div>
+          ) : (
+            <SingleRecipe singleRecipe={singleRecipe}></SingleRecipe>
+          )}
         </div>
       </div>
 
