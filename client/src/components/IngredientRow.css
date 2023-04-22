@@ -5,13 +5,13 @@
 }
 
 .name {
-  width: 125px;
+  width: 30%;
 }
 
 .quantity {
-  width: 75px;
+  width: 30%;
 }
 
 .unit {
-  width: 100px;
+  width: 30%;
 }

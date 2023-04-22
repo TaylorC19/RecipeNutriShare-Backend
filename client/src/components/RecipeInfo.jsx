@@ -111,7 +111,7 @@ function RecipeInfo(props) {
           placeholder="Add a desciption for your recipe"
           name="description"
           id="desciption"
-          cols="60"
+         
           rows="10"
         ></textarea>
       </div>
@@ -123,7 +123,7 @@ function RecipeInfo(props) {
           placeholder="Add the instructions for your recipe"
           name="instructions"
           id="instructions"
-          cols="60"
+          
           rows="10"
         ></textarea>
       </div>

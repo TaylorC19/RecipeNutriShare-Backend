@@ -3,3 +3,7 @@
   flex-direction: column;
   padding-top: 20px;
 }
+
+textarea {
+  width: 95%;
+}
