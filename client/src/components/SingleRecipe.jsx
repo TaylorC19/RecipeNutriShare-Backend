@@ -11,14 +11,14 @@ function SingleRecipe(props) {
 
   console.log(singleRecipe);
   return (
-    <div className="contents">
+    <div className="contents-div">
       <h2>Title: {singleRecipe.title}</h2>
       <div className="nutrition-info">
         <p>Servings:{singleRecipe.servings}</p>
         <p>Total calories: {singleRecipe.total_calories}</p>
         <p>
-          Cook Time: {singleRecipe.hours ? singleRecipe.hours : 0} hour(s) and{" "}
-          {singleRecipe.minutes ? singleRecipe.minutes : 0} minute(s)
+          Cook Time: {singleRecipe.hours ? singleRecipe.hours : 0} hr(s) and{" "}
+          {singleRecipe.minutes ? singleRecipe.minutes : 0} min(s)
         </p>
       </div>
       <h4>Nutrition Information (per serving)</h4>

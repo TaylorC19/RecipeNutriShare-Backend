@@ -1,10 +1,10 @@
-.contents{
+.contents-div {
   display: flex;
   flex-direction: column;
 }
 
-.contents h2 {
-  margin: 5px 0;
+.contents-div h2 {
+  margin: 0 0 15px 0;
 }
 
 .nutrition-info {
@@ -38,11 +38,6 @@
   .nutrition-info {
     display: grid;
     grid-template-columns: 1fr;
-  }
-  
-  .contents{
-    display: flex;
-    flex-direction: column;
   }
 
   .full-recipe {
