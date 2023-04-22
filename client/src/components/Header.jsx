@@ -20,7 +20,7 @@ const Header = () => {
 
   return(
     <div className="header-div">
-      <h1>Meal Prep Life</h1>
+      <h1 className="logo">Meal Prep Life</h1>
         {Object.keys(user).length !== 0
         ? 
       <div className="navigate-items">

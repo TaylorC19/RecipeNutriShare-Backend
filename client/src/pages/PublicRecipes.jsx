@@ -24,26 +24,29 @@ function PublicRecipes() {
   return (
     <div>
       <Header />
-      <h1>Public Recipes</h1>
-      <div className="recipe-contents-div">
-        {isDefaultView ? (
-          publicRecipes.map((recipe, index) => {
-            return (
-              <RecipeCard
-                recipeInfo={recipe}
-                key={index}
-                index={index}
-                setSingleRecipe={setSingleRecipe}
-                setIsDefaultView={setIsDefaultView}
-              />
-            );
-          })
-        ) : (
-          <SingleRecipe
-            setIsDefaultView={setIsDefaultView}
-            singleRecipe={singleRecipe}
-          ></SingleRecipe>
-        )}
+      <div className="contents">
+        <h1>Public Recipes</h1>
+        <div className="recipe-contents-div">
+          {isDefaultView ? (
+            publicRecipes.map((recipe, index) => {
+              return (
+                <RecipeCard
+                  recipeInfo={recipe}
+                  key={index}
+                  index={index}
+                  setSingleRecipe={setSingleRecipe}
+                  setIsDefaultView={setIsDefaultView}
+                />
+              );
+            })
+          ) : (
+            <SingleRecipe
+              setIsDefaultView={setIsDefaultView}
+              singleRecipe={singleRecipe}
+            ></SingleRecipe>
+          )}
+        </div>
+
       </div>
       <Footer></Footer>
     </div>
