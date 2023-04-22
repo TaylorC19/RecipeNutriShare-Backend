@@ -30,21 +30,21 @@ function IngredientRow(props) {
         onChange={handleName}
         type="text"
         className="name"
-        placeholder="item"
+        placeholder="ingredient"
       />
       <input
         value={ingredientsArr[index]['quantity']}
         onChange={handleQuantity}
-        type="text"
+        type="number"
         className="quantity"
-        placeholder="quantity (Number)"
+        placeholder="quantity"
       />
       <input
         value={ingredientsArr[index]['unit']}
         onChange={handleUnit}
         type="text"
         className="unit"
-        placeholder="units (large, grams, ounces, etc.)"
+        placeholder="units"
       />
     </div>
   );

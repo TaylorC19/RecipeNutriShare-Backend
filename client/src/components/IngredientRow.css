@@ -1,6 +1,7 @@
 .one-item {
   display: flex;
   margin: 5px 0px;
+  justify-content: space-between;
 }
 
 .name {
@@ -8,9 +9,9 @@
 }
 
 .quantity {
-  width: 50px;
+  width: 75px;
 }
 
 .unit {
-  width: 125px;
+  width: 100px;
 }

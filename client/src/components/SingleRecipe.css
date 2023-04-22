@@ -34,6 +34,10 @@
   margin: 0 0 5px 0;
 }
 
+.margin-right {
+  margin-right: 15px;
+}
+
 @media screen and (max-width: 500px) {
   .nutrition-info {
     display: grid;

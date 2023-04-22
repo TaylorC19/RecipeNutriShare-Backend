@@ -73,11 +73,11 @@ function RecipeInfo(props) {
       </div>
 
       <div>
-        <label htmlFor="servings">servings: </label>
+        <label htmlFor="servings">Servings: </label>
         <input
           onChange={handleServings}
           value={recipeInfo.servings}
-          type="text"
+          type="number"
           id="servings"
           placeholder="how many servings?"
         />
@@ -89,7 +89,7 @@ function RecipeInfo(props) {
           <input
             onChange={handleHours}
             value={recipeInfo.hours}
-            type="text"
+            type="number"
             id="hours"
             placeholder="hours"
           />{" "}
@@ -97,7 +97,7 @@ function RecipeInfo(props) {
           <input
             onChange={handleMinutes}
             value={recipeInfo.minutes}
-            type="text"
+            type="number"
             id="minutes"
             placeholder="minutes"
           />
@@ -133,15 +133,6 @@ function RecipeInfo(props) {
         <input type="checkbox" onClick={handleIsPublic} />
         <p>By default, your recipe will be private. Check the above box for others to be able to see it.</p>
       </div>
-
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log(recipeInfo);
-        }}
-      >
-        Console.log inputData
-      </button>
     </div>
   );
 }

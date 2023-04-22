@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="home-contents">
+      <div className="contents">
         <h1>Welcome!</h1>
         <p>Current User: {(user.user && user.user.email) || "None"}</p>
         {Object.keys(user).length === 0 ? (

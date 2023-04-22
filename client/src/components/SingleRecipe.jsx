@@ -55,6 +55,7 @@ function SingleRecipe(props) {
       {setIsDefaultView ? (
         <div>
           <button
+          className="margin-right"
             onClick={(e) => {
               e.preventDefault();
               setIsDefaultView(true);
@@ -65,6 +66,7 @@ function SingleRecipe(props) {
           {user.user !== undefined &&
           user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
+              className="margin-right"
               onClick={async (e) => {
                 e.preventDefault();
                 if (user) {

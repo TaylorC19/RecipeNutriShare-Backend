@@ -5,6 +5,7 @@ import RecipeInfo from "../components/RecipeInfo";
 import "./NewRecipe.css";
 import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
+import Footer from "../components/Footer"
 
 const NewRecipe = () => {
   const [ingredientsArr, setIngredientsArr] = useState([
@@ -85,11 +86,12 @@ const NewRecipe = () => {
             setRecipeInfo={setRecipeInfo}
           ></RecipeInfo>
         </div>
-        <button type="submit">Submit new recipe</button>
+        <button className="btn right" type="submit">Submit new recipe</button>
       </form>
       </div>)
 
     }
+    <Footer></Footer>
     </div>
   );
 };
