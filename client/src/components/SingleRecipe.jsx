@@ -9,7 +9,6 @@ function SingleRecipe(props) {
   const navigate = useNavigate();
   const { user } = UserAuth();
 
-  console.log(singleRecipe);
   return (
     <div className="contents-div">
       <h2>Title: {singleRecipe.title}</h2>
@@ -34,9 +33,9 @@ function SingleRecipe(props) {
         <div className="ingredients">
           <p>Ingredients:</p>
           <ul>
-            {singleRecipe.ingredients.map((ingredient) => {
+            {singleRecipe.ingredients.map((ingredient, index) => {
               return (
-                <li className="single-ingredient">
+                <li className="single-ingredient" key={index}>
                   {ingredient.quantity} {ingredient.unit} {ingredient.name} (
                   {ingredient.calories} calories)
                 </li>
@@ -48,8 +47,8 @@ function SingleRecipe(props) {
         <div className="recipe-info">
           <p>Description: {singleRecipe.description}</p>
           <p>Instructions:</p>
-          {singleRecipe.instructions.split("\n").map((element) => {
-            return <p className="instructions-p">{element}</p>;
+          {singleRecipe.instructions.split("\n").map((element, index) => {
+            return <p key={index} className="instructions-p">{element}</p>;
           })}
         </div>
       </div>

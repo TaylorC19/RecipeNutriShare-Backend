@@ -8,12 +8,12 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      if(sessionStorage.getItem('user_info')) {
+      if(JSON.parse(sessionStorage.getItem('user_info'))) {
         setUser(JSON.parse(sessionStorage.getItem('user_info')));
       }
       
     } catch (error) {
-      console.log('no user')
+      
     }
     // if (JSON.parse(sessionStorage.getItem('user_info'))) {
     //   setUser(JSON.parse(sessionStorage.getItem('user_info')));
@@ -30,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
     if (userCred) {
       setUser(userCred);
   
-      sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
+      sessionStorage.setItem('user_info', JSON.stringify(userCred))
 
       return userCred;
     } else {
@@ -47,11 +47,11 @@ export const AuthContextProvider = ({ children }) => {
       password: password,
     })
       .then(result => result.data);
-    console.log(userCred)
+    
 
     if (userCred) {
       setUser(userCred); 
-      sessionStorage.setItem('user_info', JSON.stringify(userCred.data))
+      sessionStorage.setItem('user_info', JSON.stringify(userCred))
   
       return userCred;
 
