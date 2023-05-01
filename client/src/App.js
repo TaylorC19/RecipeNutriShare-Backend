@@ -39,6 +39,11 @@ function App() {
               <NewRecipe />
             </ProtectedRoute>
           }></Route>
+          <Route path="/edit-recipe" element={
+            <ProtectedRoute> 
+              <EditRecipe />
+            </ProtectedRoute>
+          }></Route>
         </Routes>
       </AuthContextProvider>
     </div>

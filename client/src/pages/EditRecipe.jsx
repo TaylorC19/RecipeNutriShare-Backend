@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Ingredients from "../components/Ingredients";
 import RecipeInfo from "../components/RecipeInfo";
-import "./NewRecipe.css";
+import "./EditRecipe.css";
 import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import Footer from "../components/Footer"
 
-const NewRecipe = () => {
+const EditRecipe = () => {
   const [ingredientsArr, setIngredientsArr] = useState([
     { name: "", quantity: "", unit: "" },
   ]);
@@ -42,7 +42,7 @@ const NewRecipe = () => {
         instructions: recipeInfo.instructions,
         is_public: recipeInfo.is_public
       };
-      
+
       setRecipeInfo(recipePayload);
 
       const queryBody = {
@@ -88,4 +88,4 @@ const NewRecipe = () => {
   );
 };
 
-export default NewRecipe;
+export default EditRecipe;
