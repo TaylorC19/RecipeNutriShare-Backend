@@ -7,7 +7,7 @@ function RecipeCard(props) {
     <div className="recipe-card">
       <h2>{recipeInfo.title}</h2>
       <div className="info-rows">
-        <p className="grid-item">Servings:{recipeInfo.servings}</p>
+        <p className="grid-item">Servings: {recipeInfo.servings}</p>
         <p className="grid-item">
           Cook Time: {recipeInfo.hours ? recipeInfo.hours : 0} hr(s) and{" "}
           {recipeInfo.minutes ? recipeInfo.minutes : 0} min(s)

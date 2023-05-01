@@ -13,7 +13,7 @@ function SingleRecipe(props) {
     <div className="contents-div">
       <h2>Title: {singleRecipe.title}</h2>
       <div className="nutrition-info">
-        <p>Servings:{singleRecipe.servings}</p>
+        <p>Servings: {singleRecipe.servings}</p>
         <p>Total calories: {singleRecipe.total_calories}</p>
         <p>
           Cook Time: {singleRecipe.hours ? singleRecipe.hours : 0} hr(s) and{" "}

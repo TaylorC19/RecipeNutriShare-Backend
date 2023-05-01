@@ -24,6 +24,7 @@ function Ingredients(props) {
         <span>Ingredient</span>
         <span>quantity</span>
         <span>units</span>
+        <span>delete</span>
       </div>
       {ingredientsArr.map((row, index) => {
         return (

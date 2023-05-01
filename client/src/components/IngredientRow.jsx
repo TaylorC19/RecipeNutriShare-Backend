@@ -22,6 +22,14 @@ function IngredientRow(props) {
     inputData[index]['unit'] = e.target.value;
     setIngredientsArr(inputData); 
   }
+  
+  const handleDeleteButton = (e) => {
+    e.preventDefault();
+    console.log('delete endpoint')
+    const inputData = [...ingredientsArr];
+    inputData.splice(index, 1);
+    setIngredientsArr(inputData);
+  }
 
   return (
     <div className="one-item">
@@ -46,6 +54,7 @@ function IngredientRow(props) {
         className="unit"
         placeholder="units"
       />
+      <button onClick={handleDeleteButton}>🗑️</button>
     </div>
   );
 }
