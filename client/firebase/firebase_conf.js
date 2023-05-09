@@ -5,7 +5,7 @@
 module.exports = {
   development: {
     config: {
-      apiKey: process.env.REACT_APP_FB_API_KEY,
+      apiKey: AIzaSyAdIkOi7RzjIhd1Asq26YbD3-OWziqFy4I,
       authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
       projectId: process.env.REACT_APP_FB_PROJECT_ID,
       storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
@@ -16,7 +16,7 @@ module.exports = {
   },
   production: { 
     config: {
-      apiKey: process.env.REACT_APP_FB_API_KEY,
+      apiKey: AIzaSyAdIkOi7RzjIhd1Asq26YbD3-OWziqFy4I,
       authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
       projectId: process.env.REACT_APP_FB_PROJECT_ID,
       storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
