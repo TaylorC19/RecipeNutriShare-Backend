@@ -17,50 +17,25 @@ export const AuthContextProvider = ({ children }) => {
     const authenticatedUser = onAuthStateChanged(auth, 
       (currentUser) => {
         console.log('🫡', currentUser);
-        setUser(currentUser);
+        setUser(currentUser || {});
       })
       return authenticatedUser;
   }, [])
 
   const createUser = async (email, password) => {
-    const newUserInfo = {
-      email: email,
-      password: password,
-      uid: null
-    };
-
     const newUser = await createUserWithEmailAndPassword(auth, email, password);
-    newUserInfo.uid = newUser.user.uid;
-    await axios.post('/auth/signup', newUserInfo);
-    return newUser;
 
-    
+    return newUser;
   };
   
   const loginUser = async (email, password) => {
-    const userCred = await axios.post("/auth/signin", {
-      email: email,
-      password: password,
-    })
-      .then(result => result.data);
+    const userCred = await signInWithEmailAndPassword(auth, email, password)
     
-
-    if (userCred) {
-      setUser(userCred); 
-      sessionStorage.setItem('user_info', JSON.stringify(userCred))
-  
-      return userCred;
-
-    } else {
-      alert("Could not sign in, please check your email and password and try again.");
-      return false;
-    }
-    
+    return userCred;
   };
 
   const logOut =  () => {
-    setUser({});
-    sessionStorage.removeItem('user_info');
+    return signOut(auth);
   };
 
   return (

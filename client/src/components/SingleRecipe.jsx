@@ -64,7 +64,7 @@ function SingleRecipe(props) {
             Back to all recipes
           </button>
           {user.user !== undefined &&
-          user.user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
+          user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
               className="margin-right"
               onClick={async (e) => {
@@ -77,7 +77,7 @@ function SingleRecipe(props) {
                       )
                     ) {
                       const request = await axios.delete(
-                        `/api/delete-recipe/user/${user.user.uid}/recipe/${singleRecipe.id}`
+                        `/api/delete-recipe/user/${user.uid}/recipe/${singleRecipe.id}`
                       );
                       if (request) {
                         navigate("/my-recipes");

@@ -47,7 +47,7 @@ const NewRecipe = () => {
 
       const queryBody = {
         query: ingredientsStr,
-        uid: user.user.uid,
+        uid: user.uid,
         recipeInfo: recipePayload 
       };
   
