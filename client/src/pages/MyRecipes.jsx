@@ -16,7 +16,7 @@ const MyRecipes = () => {
   useEffect(() => {
     (async function () {
       const userRecipes = await axios
-        .get(`/api/recipes/${user.user.uid}`)
+        .get(`/api/recipes/${user.uid}`)
         .then((results) => results.data);
       setMyRecipes(userRecipes);
       return "allGood";
@@ -24,7 +24,7 @@ const MyRecipes = () => {
     // console.log('useEffect is running')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // getRecipes();
-  }, [user.user.uid]);
+  }, [user.uid]);
 
   return (
     <div>

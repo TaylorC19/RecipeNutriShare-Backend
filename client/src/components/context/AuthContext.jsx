@@ -1,5 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
+import auth from '../../firebase/firebase'
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut,
+  onAuthStateChanged 
+} from 'firebase/auth';
 
 const UserContext = createContext();
 
@@ -7,64 +14,28 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    try {
-      if(JSON.parse(sessionStorage.getItem('user_info'))) {
-        setUser(JSON.parse(sessionStorage.getItem('user_info')));
-      }
-      
-    } catch (error) {
-      
-    }
-    // if (JSON.parse(sessionStorage.getItem('user_info'))) {
-    //   setUser(JSON.parse(sessionStorage.getItem('user_info')));
-    // }
+    const authenticatedUser = onAuthStateChanged(auth, 
+      (currentUser) => {
+        // console.log('🫡', currentUser);
+        setUser(currentUser || {});
+      })
+      return authenticatedUser;
   }, [])
 
   const createUser = async (email, password) => {
-    const userCred = await axios.post("/auth/signup", {
-      email: email,
-      password: password,
-    })
-      .then(result => result.data);
+    const newUser = await createUserWithEmailAndPassword(auth, email, password);
 
-    if (userCred) {
-      setUser(userCred);
-  
-      sessionStorage.setItem('user_info', JSON.stringify(userCred))
-
-      return userCred;
-    } else {
-      alert("Could not create an account, check you email and password and try again.");
-      return false;
-    }
-
-    
+    return newUser;
   };
   
   const loginUser = async (email, password) => {
-    const userCred = await axios.post("/auth/signin", {
-      email: email,
-      password: password,
-    })
-      .then(result => result.data);
+    const userCred = await signInWithEmailAndPassword(auth, email, password)
     
-
-    if (userCred) {
-      setUser(userCred); 
-      sessionStorage.setItem('user_info', JSON.stringify(userCred))
-  
-      return userCred;
-
-    } else {
-      alert("Could not sign in, please check your email and password and try again.");
-      return false;
-    }
-    
+    return userCred;
   };
 
   const logOut =  () => {
-    setUser({});
-    sessionStorage.removeItem('user_info');
+    return signOut(auth);
   };
 
   return (

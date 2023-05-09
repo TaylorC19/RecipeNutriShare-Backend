@@ -25,7 +25,6 @@ function IngredientRow(props) {
   
   const handleDeleteButton = (e) => {
     e.preventDefault();
-    console.log('delete endpoint')
     const inputData = [...ingredientsArr];
     inputData.splice(index, 1);
     setIngredientsArr(inputData);
