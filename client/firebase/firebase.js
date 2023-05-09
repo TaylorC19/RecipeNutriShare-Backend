@@ -14,7 +14,7 @@ const firebaseConfig = {
 }
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optionals
 
 // console.log(firebaseConfig[process.env.REACT_APP_NODE_ENV].config)
 console.log(firebaseConfig)
