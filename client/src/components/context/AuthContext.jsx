@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import auth from '../../firebase/firebase'
 import { 
   signInWithEmailAndPassword, 
@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const authenticatedUser = onAuthStateChanged(auth, 
       (currentUser) => {
-        console.log('🫡', currentUser);
+        // console.log('🫡', currentUser);
         setUser(currentUser || {});
       })
       return authenticatedUser;

@@ -11,36 +11,6 @@ router.get('/hello', (req, res) => {
   res.send('world')
 })
 
-router.post("/signin", async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const userCred = await signInWithEmailAndPassword(auth, email, password);
-  
-    //console.log(userCred);
-    res.send(userCred);
-    
-  } catch (error) {
-    console.log(error);
-    res.send(false);
-  }
-
-});
-
-router.post("/signup", async (req, res) => {
-  const { email, password, uid } = req.body;
-
-  try {
-
-    console.log(uid);
-
-    await knex("users").insert({ uid: uid });
-    //console.log(userCred);
-    res.send(userCred);
-  } catch (error) {
-    console.log(error);
-    res.send(false);
-  }
-});
+// This is no longer needed
 
 module.exports = router
