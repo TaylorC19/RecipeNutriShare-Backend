@@ -1,10 +1,6 @@
 const express = require("express");
 const path = require("path");
-const auth = require("./firebase/firebase");
-const {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} = require("firebase/auth");
+
 const knex = require("../db/knex");
 const axios = require("axios");
 const nutrition = require("./utils/nutrition-api");
