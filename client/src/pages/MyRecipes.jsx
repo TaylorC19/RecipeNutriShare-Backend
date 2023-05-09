@@ -21,7 +21,7 @@ const MyRecipes = () => {
       setMyRecipes(userRecipes);
       return "allGood";
     })();
-    // console.log('useEffect is running')
+    // console.log('useEffect')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // getRecipes();
   }, [user.uid]);
