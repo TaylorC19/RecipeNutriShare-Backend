@@ -1,5 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import auth from '../../firebase/firebase'
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut,
+  onAuthStateChanged 
+} from 'firebase/auth';
 
 const UserContext = createContext();
 
@@ -7,36 +14,25 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    try {
-      if(JSON.parse(sessionStorage.getItem('user_info'))) {
-        setUser(JSON.parse(sessionStorage.getItem('user_info')));
-      }
-      
-    } catch (error) {
-      
-    }
-    // if (JSON.parse(sessionStorage.getItem('user_info'))) {
-    //   setUser(JSON.parse(sessionStorage.getItem('user_info')));
-    // }
+    const authenticatedUser = onAuthStateChanged(auth, 
+      (currentUser) => {
+        console.log('🫡', currentUser);
+        setUser(currentUser);
+      })
+      return authenticatedUser;
   }, [])
 
   const createUser = async (email, password) => {
-    const userCred = await axios.post("/auth/signup", {
+    const newUserInfo = {
       email: email,
       password: password,
-    })
-      .then(result => result.data);
+      uid: null
+    };
 
-    if (userCred) {
-      setUser(userCred);
-  
-      sessionStorage.setItem('user_info', JSON.stringify(userCred))
-
-      return userCred;
-    } else {
-      alert("Could not create an account, check you email and password and try again.");
-      return false;
-    }
+    const newUser = await createUserWithEmailAndPassword(auth, email, password);
+    newUserInfo.uid = newUser.user.uid;
+    await axios.post('/auth/signup', newUserInfo);
+    return newUser;
 
     
   };

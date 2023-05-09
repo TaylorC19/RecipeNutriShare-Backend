@@ -28,18 +28,9 @@ router.post("/signin", async (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, uid } = req.body;
 
   try {
-    const userCred = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-    console.log(userCred);
-
-    const uid = userCred.user.uid;
 
     console.log(uid);
 
