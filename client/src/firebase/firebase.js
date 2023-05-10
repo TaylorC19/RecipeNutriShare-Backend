@@ -23,11 +23,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig[process.env.REACT_APP_NODE_ENV].config);
-console.log(process.env)
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const auth = getAuth(app);
-console.log(firebaseConfig)
-console.log(auth)
 
 module.exports = auth
