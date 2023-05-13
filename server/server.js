@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require("path");
-
 const knex = require("../db/knex");
-const axios = require("axios");
 const nutrition = require("./utils/nutrition-api");
 const getRandomItem = require("./utils/getRandomItem");
 
