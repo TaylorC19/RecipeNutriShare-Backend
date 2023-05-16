@@ -63,7 +63,7 @@ function SingleRecipe(props) {
           >
             Back to all recipes
           </button>
-          {user.user !== undefined &&
+          {
           user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
               className="margin-right"
