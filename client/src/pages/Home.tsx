@@ -7,12 +7,26 @@ import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import "./Home.css";
 
+interface ingrObj {
+  name: string,
+
+}
+
+interface singleRecipeObj {
+  ingredients: ingrObj[],
+  instructions: string,
+  title: string,
+  description: string
+}
+
 const Home = () => {
   const { user, logOut } = UserAuth();
   //const navigate = useNavigate();
-  const [singleRecipe, setSingleRecipe] = useState({
+  const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
     ingredients: [],
     instructions: "",
+    title: '',
+    description: ''
   });
   const [moreInfo, setMoreInfo] = useState(false);
 
