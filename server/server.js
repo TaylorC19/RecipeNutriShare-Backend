@@ -84,6 +84,20 @@ function setupServer() {
     res.send(myRecipes);
   });
 
+  app.get("/api/all-recipes/", async (req, res) => {
+    const passcode = req.headers.passcode;
+
+    if (passcode === process.env.MASTERCODE) {
+        const myRecipes = await knex("recipes")
+          .select()
+    
+        res.send(myRecipes);
+
+    } else {
+        res.send("Wrong Code")
+    }
+  });
+
   app.get("/api/public-recipes", async (req, res) => {
     const publicRecipes = await knex("recipes")
       .select()
