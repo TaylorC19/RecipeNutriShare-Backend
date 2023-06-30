@@ -50,8 +50,8 @@ const Home = () => {
       <Header />
       <div className="contents">
         <h1>Welcome!</h1>
-        <p>Current User: {(user.email) || "None"}</p>
-        {Object.keys(user).length === 0 ? (
+        <p>Current User: {(user?.email) || "None"}</p>
+        {user ? (
           <p>Please sign in or sign up!</p>
         ) : (
           <button onClick={handleLogOut}>Logout</button>
