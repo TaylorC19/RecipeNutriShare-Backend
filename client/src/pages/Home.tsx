@@ -15,7 +15,7 @@ import { singleRecipeObj } from "../global.t";
 //   description: string
 // }
 
-const Home = () => {
+function Home ()  {
   const { user, logOut } = UserAuth();
   //const navigate = useNavigate();
   const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
@@ -26,11 +26,11 @@ const Home = () => {
   });
   const [moreInfo, setMoreInfo] = useState<boolean>(false);
 
-  useEffect( () => {
-    const getHighlight = async () => {
+  useEffect(()=> {
+    const getHighlight = async ()=> {
       const highlight = await axios
-        .get("/api/random-recipe")
-        .then((result) => result.data);
+        .get<singleRecipeObj>("/api/random-recipe")
+        .then((result)=> result.data);
       setSingleRecipe(highlight);
     };
     getHighlight();
