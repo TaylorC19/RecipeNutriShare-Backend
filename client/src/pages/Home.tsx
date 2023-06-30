@@ -19,10 +19,20 @@ function Home ()  {
   const { user, logOut } = UserAuth();
   //const navigate = useNavigate();
   const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
-    ingredients: [],
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
     instructions: "",
-    title: '',
-    description: ''
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
   });
   const [moreInfo, setMoreInfo] = useState<boolean>(false);
 
@@ -128,8 +138,8 @@ function Home ()  {
           <h2>Highlighted Recipe</h2>
           {!moreInfo ? (
             <div>
-              <h3>Title: {singleRecipe.title}</h3>
-              <p>{singleRecipe.description}</p>
+              <h3>Title: {singleRecipe?.title}</h3>
+              <p>{singleRecipe?.description}</p>
               <button
                 onClick= {(e) => {
                   e.preventDefault();
