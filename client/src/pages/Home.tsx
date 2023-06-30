@@ -6,18 +6,14 @@ import { UserAuth } from "../components/context/AuthContext";
 // import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
+import { singleRecipeObj } from "../global.t";
 
-interface ingrObj {
-  name: string,
-
-}
-
-interface singleRecipeObj {
-  ingredients: ingrObj[],
-  instructions: string,
-  title: string,
-  description: string
-}
+// interface singleRecipeObj {
+//   ingredients: ingrObj[],
+//   instructions: string,
+//   title: string,
+//   description: string
+// }
 
 const Home = () => {
   const { user, logOut } = UserAuth();
@@ -28,9 +24,9 @@ const Home = () => {
     title: '',
     description: ''
   });
-  const [moreInfo, setMoreInfo] = useState(false);
+  const [moreInfo, setMoreInfo] = useState<boolean>(false);
 
-  useEffect(() => {
+  useEffect( () => {
     const getHighlight = async () => {
       const highlight = await axios
         .get("/api/random-recipe")
@@ -135,7 +131,7 @@ const Home = () => {
               <h3>Title: {singleRecipe.title}</h3>
               <p>{singleRecipe.description}</p>
               <button
-                onClick={(e) => {
+                onClick= {(e) => {
                   e.preventDefault();
                   setMoreInfo(true);
                 }}
