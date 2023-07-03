@@ -1,7 +1,11 @@
 import React from 'react';
 import "./Footer.css";
 
-function Footer(props) {
+interface PropsInterface {
+  text: string
+}
+
+function Footer(props: PropsInterface) {
   const { text } = props;
   return (
     <div className='footer-div'>
