@@ -10,12 +10,12 @@ function SignUp() {
   const navigate = useNavigate();
   const { user, createUser } = UserAuth();
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       await createUser(email, password);
-      if (Object.keys(user).length !== 0) {
+      if (!user) {
         navigate("/");
       }
     } catch (error) {
