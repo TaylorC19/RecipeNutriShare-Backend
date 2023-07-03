@@ -65,7 +65,7 @@ function setupServer() {
 
       const writeRecipe = await knex("recipes").insert(newRecipe);
 
-      console.log(writeRecipe);
+      // console.log(writeRecipe);
       res.send(newRecipe);
     } catch (error) {
       console.error(error);
@@ -128,7 +128,7 @@ function setupServer() {
 
         res.send(true);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send(false);
       }
     }

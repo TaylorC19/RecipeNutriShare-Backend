@@ -12,7 +12,6 @@ const Header: React.FC = () => {
 
   const handleLogOut = async () => {
     try {
-      console.log("user", user);
       await logOut();
       navigate("/");
     } catch (error) {

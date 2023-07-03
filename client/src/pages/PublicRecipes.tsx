@@ -5,11 +5,27 @@ import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import SingleRecipe from "../components/SingleRecipe";
 import './PublicRecipes.css';
+import { singleRecipeObj } from "../global.t";
 
 function PublicRecipes() {
-  const [publicRecipes, setPublicRecipes] = useState([]);
-  const [isDefaultView, setIsDefaultView] = useState(true);
-  const [singleRecipe, setSingleRecipe] = useState({});
+  const [publicRecipes, setPublicRecipes] = useState<singleRecipeObj[]>([]);
+  const [isDefaultView, setIsDefaultView] = useState<boolean>(true);
+  const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
+    instructions: "",
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
+  });
 
   useEffect(() => {
     (async function () {
