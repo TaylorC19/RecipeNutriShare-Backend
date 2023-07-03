@@ -61,7 +61,7 @@ function Home ()  {
       <div className="contents">
         <h1>Welcome!</h1>
         <p>Current User: {(user?.email) || "None"}</p>
-        {user ? (
+        {!user ? (
           <p>Please sign in or sign up!</p>
         ) : (
           <button onClick={handleLogOut}>Logout</button>
