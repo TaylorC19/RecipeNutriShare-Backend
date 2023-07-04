@@ -19,8 +19,10 @@
 
 ## Install
 
+This application uses an express server backend with a React app frontend within the client folder. Using this command with install all necessary modules for both the frontend and backend. In order to do this, you will need a `.env` file in both the root level and client folder with the variables contained in the `.env.example`.
+
 ```sh
-npm install
+npm run build
 ```
 
 ## Usage
