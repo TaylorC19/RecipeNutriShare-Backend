@@ -6,35 +6,34 @@ import { UserAuth } from "../components/context/AuthContext";
 // import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Home.css";
+import { singleRecipeObj } from "../global.t";
 
-interface ingrObj {
-  name: string,
-
-}
-
-interface singleRecipeObj {
-  ingredients: ingrObj[],
-  instructions: string,
-  title: string,
-  description: string
-}
-
-const Home = () => {
+function Home ()  {
   const { user, logOut } = UserAuth();
   //const navigate = useNavigate();
   const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
-    ingredients: [],
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
     instructions: "",
-    title: '',
-    description: ''
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
   });
-  const [moreInfo, setMoreInfo] = useState(false);
+  const [moreInfo, setMoreInfo] = useState<boolean>(false);
 
-  useEffect(() => {
-    const getHighlight = async () => {
+  useEffect(()=> {
+    const getHighlight = async ()=> {
       const highlight = await axios
-        .get("/api/random-recipe")
-        .then((result) => result.data);
+        .get<singleRecipeObj>("/api/random-recipe")
+        .then((result)=> result.data);
       setSingleRecipe(highlight);
     };
     getHighlight();
@@ -54,8 +53,8 @@ const Home = () => {
       <Header />
       <div className="contents">
         <h1>Welcome!</h1>
-        <p>Current User: {(user.email) || "None"}</p>
-        {Object.keys(user).length === 0 ? (
+        <p>Current User: {(user?.email) || "None"}</p>
+        {!user ? (
           <p>Please sign in or sign up!</p>
         ) : (
           <button onClick={handleLogOut}>Logout</button>
@@ -132,10 +131,10 @@ const Home = () => {
           <h2>Highlighted Recipe</h2>
           {!moreInfo ? (
             <div>
-              <h3>Title: {singleRecipe.title}</h3>
-              <p>{singleRecipe.description}</p>
+              <h3>Title: {singleRecipe?.title}</h3>
+              <p>{singleRecipe?.description}</p>
               <button
-                onClick={(e) => {
+                onClick= {(e) => {
                   e.preventDefault();
                   setMoreInfo(true);
                 }}

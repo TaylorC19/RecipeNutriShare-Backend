@@ -1,7 +1,15 @@
 import React from "react";
 import "./RecipeCard.css";
+import { singleRecipeObj } from "../global.t";
 
-function RecipeCard(props) {
+interface PropsInterface {
+  recipeInfo: singleRecipeObj,
+  setSingleRecipe: (value:singleRecipeObj) => void,
+  setIsDefaultView: (value: boolean) => void,
+  index?: number,
+}
+
+function RecipeCard(props: PropsInterface) {
   const { recipeInfo, setSingleRecipe, setIsDefaultView } = props;
   return (
     <div className="recipe-card">
@@ -27,7 +35,6 @@ function RecipeCard(props) {
       <p>Description: {recipeInfo.description}</p>
 
       <button
-
         onClick={(e) => {
           e.preventDefault();
           setSingleRecipe(recipeInfo);

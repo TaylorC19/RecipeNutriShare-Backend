@@ -1,40 +1,50 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import SingleRecipe from "../components/SingleRecipe";
+import './PublicRecipes.css';
+import { singleRecipeObj } from "../global.t";
 
-const MyRecipes = () => {
-  const [myRecipes, setMyRecipes] = useState([]);
-  const [isDefaultView, setIsDefaultView] = useState(true);
-  const [singleRecipe, setSingleRecipe] = useState({});
-
-  const { user } = UserAuth();
+function PublicRecipes() {
+  const [publicRecipes, setPublicRecipes] = useState<singleRecipeObj[]>([]);
+  const [isDefaultView, setIsDefaultView] = useState<boolean>(true);
+  const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
+    instructions: "",
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
+  });
 
   useEffect(() => {
     (async function () {
       const userRecipes = await axios
-        .get(`/api/recipes/${user.uid}`)
+        .get(`/api/public-recipes`)
         .then((results) => results.data);
-      setMyRecipes(userRecipes);
+      setPublicRecipes(userRecipes);
       return "allGood";
     })();
-    // console.log('useEffect')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // getRecipes();
-  }, [user.uid]);
+  }, []);
 
   return (
     <div>
       <Header />
       <div className="contents">
-        <h1>Your Recipes</h1>
-
+        <h1>Public Recipes</h1>
         <div className="recipe-contents-div">
           {isDefaultView ? (
-            myRecipes.map((recipe, index) => {
+            publicRecipes.map((recipe, index) => {
               return (
                 <RecipeCard
                   recipeInfo={recipe}
@@ -52,11 +62,11 @@ const MyRecipes = () => {
             ></SingleRecipe>
           )}
         </div>
-        
+
       </div>
       <Footer></Footer>
     </div>
   );
-};
+}
 
-export default MyRecipes;
+export default PublicRecipes;

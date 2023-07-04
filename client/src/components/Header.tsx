@@ -1,16 +1,17 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import { UserAuth } from "./context/AuthContext";
 
-const Header = () => {
+
+
+const Header: React.FC = () => {
   const { user, logOut } = UserAuth();
 
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
     try {
-      console.log("user", user);
       await logOut();
       navigate("/");
     } catch (error) {
@@ -22,7 +23,7 @@ const Header = () => {
     <nav className="header-div">
       <h1 className="logo">Meal Prep Life</h1>
       
-      {Object.keys(user).length !== 0 ? (
+      {user ? (
         <div className="navigate-items">
           <button onClick={() => navigate("/")}>Home</button>
           <button onClick={() => navigate("/public-recipes")}>

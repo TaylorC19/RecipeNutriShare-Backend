@@ -11,11 +11,12 @@ function SignIn() {
   const navigate = useNavigate();
   const { user, loginUser } = UserAuth();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       await loginUser(email, password);
-      if (Object.keys(user).length !== 0) {
+      // if (Object.keys(user).length !== 0) {
+      if (!user) {
         navigate("/");
       }
     } catch (error) {

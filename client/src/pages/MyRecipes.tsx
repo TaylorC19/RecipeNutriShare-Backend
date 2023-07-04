@@ -1,34 +1,56 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import SingleRecipe from "../components/SingleRecipe";
-import './PublicRecipes.css';
+import { singleRecipeObj } from "../global.t";
 
-function PublicRecipes() {
-  const [publicRecipes, setPublicRecipes] = useState([]);
-  const [isDefaultView, setIsDefaultView] = useState(true);
-  const [singleRecipe, setSingleRecipe] = useState({});
+const MyRecipes = () => {
+  const [myRecipes, setMyRecipes] = useState<singleRecipeObj[]>([]);
+  const [isDefaultView, setIsDefaultView] = useState<boolean>(true);
+  const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
+    instructions: "",
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
+  });
+
+  const { user } = UserAuth();
 
   useEffect(() => {
     (async function () {
       const userRecipes = await axios
-        .get(`/api/public-recipes`)
+        .get(`/api/recipes/${user?.uid}`)
         .then((results) => results.data);
-      setPublicRecipes(userRecipes);
+      setMyRecipes(userRecipes);
       return "allGood";
     })();
-  }, []);
+    // console.log('useEffect')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // getRecipes();
+  }, [user]);
 
   return (
     <div>
       <Header />
       <div className="contents">
-        <h1>Public Recipes</h1>
+        <h1>Your Recipes</h1>
+
         <div className="recipe-contents-div">
           {isDefaultView ? (
-            publicRecipes.map((recipe, index) => {
+            myRecipes.map((recipe, index) => {
               return (
                 <RecipeCard
                   recipeInfo={recipe}
@@ -46,11 +68,11 @@ function PublicRecipes() {
             ></SingleRecipe>
           )}
         </div>
-
+        
       </div>
       <Footer></Footer>
     </div>
   );
-}
+};
 
-export default PublicRecipes;
+export default MyRecipes;

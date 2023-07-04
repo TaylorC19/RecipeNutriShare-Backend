@@ -3,8 +3,14 @@ import "./SingleRecipe.css";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
 import axios from "axios";
+import { ingrObj, singleRecipeObj } from "../global.t";
 
-function SingleRecipe(props) {
+interface PropsInterface {
+  singleRecipe: singleRecipeObj,
+  setIsDefaultView?: ((value:boolean) => void)
+}
+
+function SingleRecipe(props:PropsInterface) {
   const { singleRecipe, setIsDefaultView } = props;
   const navigate = useNavigate();
   const { user } = UserAuth();
@@ -33,7 +39,7 @@ function SingleRecipe(props) {
         <div className="ingredients">
           <p>Ingredients:</p>
           <ul>
-            {singleRecipe.ingredients.map((ingredient, index) => {
+            {singleRecipe.ingredients.map((ingredient:ingrObj, index:number) => {
               return (
                 <li className="single-ingredient" key={index}>
                   {ingredient.quantity} {ingredient.unit} {ingredient.name} (
@@ -47,7 +53,7 @@ function SingleRecipe(props) {
         <div className="recipe-info">
           <p>Description: {singleRecipe.description}</p>
           <p>Instructions:</p>
-          {singleRecipe.instructions.split("\n").map((element, index) => {
+          {singleRecipe.instructions.split("\n").map((element:string, index:number) => {
             return <p key={index} className="instructions-p">{element}</p>;
           })}
         </div>
@@ -64,7 +70,7 @@ function SingleRecipe(props) {
             Back to all recipes
           </button>
           {
-          user.uid === singleRecipe.user_uid ? ( // button to delete a recipe
+          user?.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
               className="margin-right"
               onClick={async (e) => {

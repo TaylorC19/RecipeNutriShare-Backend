@@ -2,10 +2,15 @@ import React from "react";
 import IngredientRow from "./IngredientRow";
 import "./Ingredients.css";
 
-function Ingredients(props) {
+interface PropsInterface {
+  ingredientsArr: { name: string, quantity: string, unit: string }[];
+  setIngredientsArr: (value:{ name: string, quantity: string, unit: string }[]) => void;
+}
+
+function Ingredients(props: PropsInterface) {
   const { ingredientsArr, setIngredientsArr } = props;
 
-  const newIngredientHandler = (e) => {
+  const newIngredientHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIngredientsArr([
       ...ingredientsArr,
