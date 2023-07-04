@@ -27,7 +27,21 @@ npm run build
 
 ## Usage
 
+For deployment, you can use the following commands to build and deploy the app.
+
 ```sh
+npm run build
+npm run start
+```
+
+For development, you will need to activate the frontend and backend separately. The method I use is having two terminals open. 
+
+```sh
+npm run dev
+```
+
+```sh
+cd client/
 npm run start
 ```
 
