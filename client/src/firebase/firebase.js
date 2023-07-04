@@ -3,7 +3,6 @@
 // Import the functions you need from the SDKs you need
 const { initializeApp } = require("firebase/app");
 const { getAuth } = require("firebase/auth");
-// const firebaseConfig = require("./firebase_conf.js");
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FB_API_KEY,

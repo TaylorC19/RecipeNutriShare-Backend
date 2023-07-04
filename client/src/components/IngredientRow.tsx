@@ -1,34 +1,42 @@
 import React from "react";
 import './IngredientRow.css'
 
-function IngredientRow(props) {
+interface PropsInterface {
+  ingredientsArr: { name: string; quantity: string; unit: string }[];
+  setIngredientsArr: (
+    value: { name: string; quantity: string; unit: string }[]
+  ) => void;
+  index: number;
+}
+
+function IngredientRow(props: PropsInterface) {
   const { ingredientsArr, setIngredientsArr, index } = props;
 
 
-  const handleName = (e) => {
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = [...ingredientsArr];
-    inputData[index]['name'] = e.target.value;
+    inputData[index]["name"] = e.target.value;
     setIngredientsArr(inputData);
-  }
+  };
 
-  const handleQuantity = (e) => {
+  const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = [...ingredientsArr];
-    inputData[index]['quantity'] = Number(e.target.value);
-    setIngredientsArr(inputData); 
-  }
+    inputData[index]["quantity"] = (e.target.value);
+    setIngredientsArr(inputData);
+  };
 
-  const handleUnit = (e) => {
+  const handleUnit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = [...ingredientsArr];
-    inputData[index]['unit'] = e.target.value;
-    setIngredientsArr(inputData); 
-  }
+    inputData[index]["unit"] = e.target.value;
+    setIngredientsArr(inputData);
+  };
   
-  const handleDeleteButton = (e) => {
+  const handleDeleteButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const inputData = [...ingredientsArr];
     inputData.splice(index, 1);
     setIngredientsArr(inputData);
-  }
+  };
 
   return (
     <div className="one-item">
