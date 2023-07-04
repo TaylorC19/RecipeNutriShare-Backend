@@ -1,7 +1,13 @@
 import React from "react";
 import "./RecipeInfo.css";
+import { recipeInfoType } from "../global.t";
 
-function RecipeInfo(props) {
+interface PropsInterface {
+  recipeInfo: recipeInfoType,
+  setRecipeInfo: (payload:recipeInfoType) => void,
+}
+
+function RecipeInfo(props:PropsInterface) {
   const { recipeInfo, setRecipeInfo } = props;
 
   /*
@@ -16,46 +22,46 @@ function RecipeInfo(props) {
   }
   */
 
-  const handleTitle = (e) => {
+  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = { ...recipeInfo };
     // const inputData = recipeInfo; // how are these different?
     inputData.title = e.target.value;
     setRecipeInfo(inputData);
   };
 
-  const handleServings = (e) => {
+  const handleServings = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = { ...recipeInfo };
-    inputData.servings = Number(e.target.value);
+    inputData.servings = (e.target.value);
     setRecipeInfo(inputData);
   };
 
-  const handleHours = (e) => {
+  const handleHours = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = { ...recipeInfo };
-    inputData.hours = Number(e.target.value);
+    inputData.hours = (e.target.value);
     setRecipeInfo(inputData);
   };
 
-  const handleMinutes = (e) => {
+  const handleMinutes = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = { ...recipeInfo };
-    inputData.minutes = Number(e.target.value);
+    inputData.minutes = (e.target.value);
     setRecipeInfo(inputData);
   };
 
-  const handleDesciption = (e) => {
-    const inputData = { ...recipeInfo }; 
+  const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputData = { ...recipeInfo };
     inputData.description = e.target.value;
     setRecipeInfo(inputData);
   };
 
-  const handleInstructions = (e) => {
-    const inputData = { ...recipeInfo }; 
+  const handleInstructions = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputData = { ...recipeInfo };
     inputData.instructions = e.target.value;
     setRecipeInfo(inputData);
   };
 
-  const handleIsPublic = (e) => {
-    const inputData = { ...recipeInfo }; 
-    inputData.is_public = !(inputData.is_public);
+  const handleIsPublic = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputData = { ...recipeInfo };
+    inputData.is_public = !inputData.is_public;
     setRecipeInfo(inputData);
   };
 
@@ -107,12 +113,12 @@ function RecipeInfo(props) {
       <div>
         <label htmlFor="description">Description:</label> <br />
         <textarea
-          onChange={handleDesciption}
+          onChange={handleDescription}
           placeholder="Add a desciption for your recipe"
           name="description"
           id="desciption"
          
-          rows="10"
+          rows={10}
         ></textarea>
       </div>
 
@@ -124,13 +130,13 @@ function RecipeInfo(props) {
           name="instructions"
           id="instructions"
           
-          rows="10"
+          rows={10}
         ></textarea>
       </div>
 
       <div>
         <label htmlFor="is-public">Do you want your recipe to be public for others to see? </label>
-        <input type="checkbox" onClick={handleIsPublic} />
+        <input type="checkbox" onChange={handleIsPublic} />
         <p>By default, your recipe will be private. Check the above box for others to be able to see it.</p>
       </div>
     </div>
