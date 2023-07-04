@@ -19,7 +19,7 @@ function RecipeInfo(props:PropsInterface) {
     description: "",
     instructions: "",
     is_public: false
-  }
+  } 
   */
 
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
