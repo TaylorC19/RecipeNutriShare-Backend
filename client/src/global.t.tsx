@@ -23,3 +23,13 @@ export interface singleRecipeObj {
   total_carbohydrates: number,
   calories_per_serving: number,
 }
+
+export interface recipeInfoType {
+  title: string,
+  servings: string,
+  hours: string,
+  minutes: string,
+  description: string,
+  instructions: string,
+  is_public: boolean,
+}

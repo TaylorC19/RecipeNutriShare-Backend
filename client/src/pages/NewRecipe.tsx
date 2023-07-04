@@ -6,12 +6,13 @@ import "./NewRecipe.css";
 import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import Footer from "../components/Footer"
+import { recipeInfoType } from "../global.t";
 
 const NewRecipe = () => {
-  const [ingredientsArr, setIngredientsArr] = useState([
+  const [ingredientsArr, setIngredientsArr] = useState<{name:string, quantity:string, unit:string}[]>([
     { name: "", quantity: "", unit: "" },
   ]);
-  const [recipeInfo, setRecipeInfo] = useState({
+  const [recipeInfo, setRecipeInfo] = useState<recipeInfoType>({
     title: "",
     servings: "",
     hours: "",
@@ -20,44 +21,46 @@ const NewRecipe = () => {
     instructions: "",
     is_public: false
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const { user } = UserAuth();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const ingredientsArr2 = ingredientsArr.map((ingredient) => {
-        let string = `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}`;
-        return string;
-      });
-      const ingredientsStr = ingredientsArr2.join(", ");
-      
+      const ingredientsStr = ingredientsArr
+        .map((ingredient) => {
+          let string = `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}`;
+          return string;
+        })
+        .join(", ");
+
       const recipePayload = {
         title: recipeInfo.title,
-        servings: recipeInfo.servings || 1,
-        hours: recipeInfo.hours || 0,
-        minutes: recipeInfo.minutes || 0,
+        servings: recipeInfo.servings || "1",
+        hours: recipeInfo.hours || "0",
+        minutes: recipeInfo.minutes || "0",
         description: recipeInfo.description,
         instructions: recipeInfo.instructions,
-        is_public: recipeInfo.is_public
+        is_public: recipeInfo.is_public,
       };
-      
+
       setRecipeInfo(recipePayload);
 
       const queryBody = {
         query: ingredientsStr,
-        uid: user.uid,
-        recipeInfo: recipePayload 
+        uid: user?.uid,
+        recipeInfo: recipePayload,
       };
-  
-      await axios.post('/api/recipe', queryBody);
-      
+
+      await axios.post("/api/recipe", queryBody);
+
       setIsSubmitted(true);
     } catch (error) {
-      alert('Your recipe could not be saved, please check that you are signed in and filled in the recipe correctly and try again.');
+      alert(
+        "Your recipe could not be saved, please check that you are signed in and filled in the recipe correctly and try again."
+      );
     }
-
   };
 
   return (
