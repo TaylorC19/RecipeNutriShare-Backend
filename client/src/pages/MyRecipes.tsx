@@ -5,18 +5,34 @@ import { UserAuth } from "../components/context/AuthContext";
 import axios from "axios";
 import RecipeCard from "../components/RecipeCard";
 import SingleRecipe from "../components/SingleRecipe";
+import { singleRecipeObj } from "../global.t";
 
 const MyRecipes = () => {
-  const [myRecipes, setMyRecipes] = useState([]);
-  const [isDefaultView, setIsDefaultView] = useState(true);
-  const [singleRecipe, setSingleRecipe] = useState({});
+  const [myRecipes, setMyRecipes] = useState<singleRecipeObj[]>([]);
+  const [isDefaultView, setIsDefaultView] = useState<boolean>(true);
+  const [singleRecipe, setSingleRecipe] = useState<singleRecipeObj>({
+    id: 0,
+    user_uid: "",
+    title: "",
+    servings: 0,
+    hours: 0,
+    minutes: 0,
+    description: "",
+    instructions: "",
+    ingredients: [],
+    in_public: false,
+    total_calories: 0,
+    total_protein: 0,
+    total_carbohydrates: 0,
+    calories_per_serving: 0,
+  });
 
   const { user } = UserAuth();
 
   useEffect(() => {
     (async function () {
       const userRecipes = await axios
-        .get(`/api/recipes/${user.uid}`)
+        .get(`/api/recipes/${user?.uid}`)
         .then((results) => results.data);
       setMyRecipes(userRecipes);
       return "allGood";
@@ -24,7 +40,7 @@ const MyRecipes = () => {
     // console.log('useEffect')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // getRecipes();
-  }, [user.uid]);
+  }, [user]);
 
   return (
     <div>

@@ -8,13 +8,6 @@ import axios from "axios";
 import "./Home.css";
 import { singleRecipeObj } from "../global.t";
 
-// interface singleRecipeObj {
-//   ingredients: ingrObj[],
-//   instructions: string,
-//   title: string,
-//   description: string
-// }
-
 function Home ()  {
   const { user, logOut } = UserAuth();
   //const navigate = useNavigate();
