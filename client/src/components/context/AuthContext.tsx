@@ -1,12 +1,13 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 // import axios from "axios";
 import auth from '../../firebase/firebase'
-import { 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signOut,
-  onAuthStateChanged 
-} from 'firebase/auth';
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
 import { User as firebaseAuthUser } from "firebase/auth";
 
@@ -15,6 +16,7 @@ interface AuthContextProps {
   loginUser: (email: string, password: string) => Promise<any>;
   logOut: () => Promise<any>;
   user: firebaseAuthUser | null;
+  resetPasswordEmail: (email: string) => Promise<any>;
 }
 
 const UserContext = createContext<AuthContextProps | null>(null);
@@ -53,8 +55,14 @@ const UserContext = createContext<AuthContextProps | null>(null);
       return signOut(auth);
     };
 
+    const resetPasswordEmail = async (email: string) => {
+      return sendPasswordResetEmail(auth, email);
+    };
+
     return (
-      <UserContext.Provider value={{ createUser, loginUser, logOut, user }}>
+      <UserContext.Provider
+        value={{ createUser, loginUser, logOut, user, resetPasswordEmail }}
+      >
         {children}
       </UserContext.Provider>
     );
