@@ -54,6 +54,9 @@ function SignIn() {
       <p>
         New? <Link to="/signup">Sign Up</Link>
       </p>
+      <p>
+        Forgot you password? <Link to="/forgot-password">Click Here.</Link>
+      </p>
       <Footer></Footer>
     </div>
   );
