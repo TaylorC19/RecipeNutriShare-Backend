@@ -50,9 +50,15 @@ function SignUp() {
         />
         <button type="submit">Sign up!</button>
       </form>
+      
       <p>
         Already have an account? Sign in <Link to="/signin">here</Link>.
       </p>
+
+      <p>
+        Forgot you password? <Link to="/forgot-password">Click Here.</Link>
+      </p>
+
       <Footer></Footer>
     </div>
   );

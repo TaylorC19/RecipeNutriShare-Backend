@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
 import Footer from "../../components/Footer";
