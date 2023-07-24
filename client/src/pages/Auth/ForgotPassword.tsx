@@ -44,6 +44,14 @@ function ForgotPassword() {
         )}
         {errorMessage && <p>{errorMessage}</p>}
       </form>
+      
+      <p>
+        Ready to sign-in? <Link to="/signin">Click here</Link>
+      </p>
+      
+      <p>
+        Don't have an account? <Link to="/signup">Click here</Link>
+      </p>
 
       <Footer />
     </>
