@@ -68,7 +68,7 @@ function SignIn() {
           Forgot you password? <Link to="/forgot-password">Click Here.</Link>
         </p>
       </div>
-      <Footer></Footer>
+      <Footer></Footer> 
     </>
   );
 }
