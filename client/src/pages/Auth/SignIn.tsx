@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
 import Footer from "../../components/Footer";
+import "./SignIn.css"
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,6 @@ function SignIn() {
     event.preventDefault();
     try {
       await loginUser(email, password);
-      // if (Object.keys(user).length !== 0) {
       if (!user) {
         navigate("/");
       }
