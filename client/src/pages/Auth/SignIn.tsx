@@ -29,21 +29,27 @@ function SignIn() {
       <Header></Header>
       <div className="signin-contents">
         <form className="signin-form" onSubmit={handleLogin} action="">
-          <h1 className="signin-header">Welcome Back!</h1>
-          <label htmlFor="signin-email">Email</label>
+          <h1 className="signin-header flex-item-margins">Welcome Back!</h1>
+          <label className="flex-item-margins" htmlFor="signin-email">
+            Email
+          </label>
           <input
             type="email"
             id="signin-email"
             value={email}
+            className="flex-item-margins"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             placeholder="someone@somewhere.com"
           />
-          <label htmlFor="signin-password">Password</label>
+          <label className="flex-item-margins" htmlFor="signin-password">
+            Password
+          </label>
           <input
             type="password"
             id="signin-password"
+            className="flex-item-margins"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -51,7 +57,7 @@ function SignIn() {
             placeholder="password"
           />
           <br />
-          <button className="signin-btn" type="submit">
+          <button className="signin-btn " type="submit">
             Sign in!
           </button>
         </form>
@@ -62,7 +68,7 @@ function SignIn() {
           Forgot you password? <Link to="/forgot-password">Click Here.</Link>
         </p>
       </div>
-      <Footer></Footer>
+      <Footer></Footer> 
     </>
   );
 }

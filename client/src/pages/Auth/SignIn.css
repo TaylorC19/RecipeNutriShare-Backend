@@ -15,6 +15,10 @@
   
 }
 
+.flex-item-margins {
+  margin: 5px 0;
+}
+
 .signin-header {
   margin: 0;
 
