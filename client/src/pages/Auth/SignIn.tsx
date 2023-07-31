@@ -25,40 +25,45 @@ function SignIn() {
   };
 
   return (
-    <div>
+    <>
       <Header></Header>
-      <form onSubmit={handleLogin} action="">
-        <h1>Welcome Back!</h1>
-        <label htmlFor="signin-email">Email</label>
-        <input
-          type="email"
-          id="signin-email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="someone@somewhere.com"
-        />
-        <label htmlFor="signin-password">Password</label>
-        <input
-          type="password"
-          id="signin-password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="password"
-        />
-        <button type="submit">Sign in!</button>
-      </form>
-      <p>
-        New? <Link to="/signup">Sign Up</Link>
-      </p>
-      <p>
-        Forgot you password? <Link to="/forgot-password">Click Here.</Link>
-      </p>
+      <div className="signin-contents">
+        <form className="signin-form" onSubmit={handleLogin} action="">
+          <h1 className="signin-header">Welcome Back!</h1>
+          <label htmlFor="signin-email">Email</label>
+          <input
+            type="email"
+            id="signin-email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="someone@somewhere.com"
+          />
+          <label htmlFor="signin-password">Password</label>
+          <input
+            type="password"
+            id="signin-password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="password"
+          />
+          <br />
+          <button className="signin-btn" type="submit">
+            Sign in!
+          </button>
+        </form>
+        <p className="small-margin">
+          New? <Link to="/signup">Sign Up</Link>
+        </p>
+        <p className="small-margin">
+          Forgot you password? <Link to="/forgot-password">Click Here.</Link>
+        </p>
+      </div>
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 
