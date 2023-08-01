@@ -56,6 +56,9 @@ function SignUp() {
             }}
             placeholder="password"
           />
+
+          <br />
+          
           <button className="signup-btn" type="submit">
             Sign up!
           </button>
