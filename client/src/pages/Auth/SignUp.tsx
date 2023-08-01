@@ -27,39 +27,48 @@ function SignUp() {
   return (
     <>
       <Header></Header>
-      <div></div>
-      <form onSubmit={handleSignUp} action="">
-        <h1>Welcome New User!</h1>
-        <label htmlFor="signup-email">Email</label>
-        <input
-          type="email"
-          id="signup-email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="someone@somewhere.com"
-        />
-        <label htmlFor="signup-password">Password</label>
-        <input
-          type="password"
-          id="signup-password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="password"
-        />
-        <button type="submit">Sign up!</button>
-      </form>
-      
-      <p>
-        Already have an account? Sign in <Link to="/signin">here</Link>.
-      </p>
+      <div className="signup-contents">
+        <form className="signup-form" onSubmit={handleSignUp} action="">
+          <h1 className="signup-header flex-item-margins">Welcome New User!</h1>
+          <label className="flex-item-margins" htmlFor="signup-email">
+            Email
+          </label>
+          <input
+            type="email"
+            id="signup-email"
+            className="flex-item-margins"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="someone@somewhere.com"
+          />
+          <label className="flex-item-margins" htmlFor="signup-password">
+            Password
+          </label>
+          <input
+            type="password"
+            id="signup-password"
+            className="flex-item-margins"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="password"
+          />
+          <button className="signup-btn" type="submit">
+            Sign up!
+          </button>
+        </form>
 
-      <p>
-        Forgot you password? <Link to="/forgot-password">Click Here.</Link>
-      </p>
+        <p className="small-margin">
+          Already have an account? Sign in <Link to="/signin">here</Link>.
+        </p>
+
+        <p className="small-margin">
+          Forgot you password? <Link to="/forgot-password">Click Here.</Link>
+        </p>
+      </div>
 
       <Footer></Footer>
     </>
