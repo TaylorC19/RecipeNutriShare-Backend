@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
 import Footer from "../../components/Footer";
+import "./SignUp.css"
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -24,8 +25,9 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <>
       <Header></Header>
+      <div></div>
       <form onSubmit={handleSignUp} action="">
         <h1>Welcome New User!</h1>
         <label htmlFor="signup-email">Email</label>
@@ -60,7 +62,7 @@ function SignUp() {
       </p>
 
       <Footer></Footer>
-    </div>
+    </>
   );
 }
 
