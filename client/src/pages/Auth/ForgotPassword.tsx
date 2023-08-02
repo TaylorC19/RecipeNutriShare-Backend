@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
 import Footer from "../../components/Footer";
+import "./ForgotPassword.css"
 
 function ForgotPassword() {
   const [email, setEmail] = useState<string>("");
