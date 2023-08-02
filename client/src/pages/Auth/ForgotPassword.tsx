@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import { UserAuth } from "../../components/context/AuthContext";
 import Footer from "../../components/Footer";
+import "./ForgotPassword.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState<string>("");
@@ -26,37 +27,38 @@ function ForgotPassword() {
     <>
       <Header />
 
-      <form action="" onSubmit={handleSubmit}>
-        <h1>Reset Password</h1>
-        <p>E-Mail Address:</p>
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <div>
-          <button type="submit" >
+      <div className="forgotpassword-contents">
+        <form className="forgotpassword-form" action="" onSubmit={handleSubmit}>
+          <h1 className="forgotpassword-header flex-item-margins">
+            Reset Password
+          </h1>
+          <p className="flex-item-margins">E-Mail Address:</p>
+          <input
+            type="text"
+            value={email}
+            className="flex-item-margins"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          <button className="forgotpassword-btn" type="submit">
             Send reset request
           </button>
-        </div>
-        {successMessage && (
-          <p>{successMessage}</p>
-        )}
-        {errorMessage && <p>{errorMessage}</p>}
-      </form>
-      
-      <p>
-        Ready to sign-in? <Link to="/signin">Click here</Link>
-      </p>
-      
-      <p>
-        Don't have an account? <Link to="/signup">Click here</Link>
-      </p>
+          {successMessage && <p>{successMessage}</p>}
+          {errorMessage && <p>{errorMessage}</p>}
+        </form>
+
+        <p className="flex-item-margins">
+          Ready to sign-in? <Link to="/signin">Click here</Link>
+        </p>
+
+        <p className="flex-item-margins">
+          Don't have an account? <Link to="/signup">Click here</Link>
+        </p>
+      </div>
 
       <Footer />
     </>
   );
-
 }
 
-export default ForgotPassword
+export default ForgotPassword;
