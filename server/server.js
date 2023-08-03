@@ -88,13 +88,11 @@ function setupServer() {
     const passcode = req.headers.passcode;
 
     if (passcode === process.env.MASTERCODE) {
-        const myRecipes = await knex("recipes")
-          .select()
-    
-        res.send(myRecipes);
+      const myRecipes = await knex("recipes").select();
 
+      res.send(myRecipes);
     } else {
-        res.send("Wrong Code")
+      res.send("Wrong Code");
     }
   });
 
@@ -134,7 +132,17 @@ function setupServer() {
     }
   );
 
-  
+  app.delete("/api/delete-user", async (req, res) => {
+    const uid = req.body.uid;
+
+    try {
+      await knex("recipes").where({ user_uid: uid }).del();
+      res.send(true);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(false);
+    }
+  });
 
   return app;
 }
