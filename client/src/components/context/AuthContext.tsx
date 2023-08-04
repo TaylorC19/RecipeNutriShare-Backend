@@ -35,7 +35,6 @@ const UserContext = createContext<AuthContextProps | null>(null);
 
     useEffect(() => {
       const authenticatedUser = onAuthStateChanged(auth, (currentUser) => {
-        // console.log('🫡', currentUser);
         setUser(currentUser || null);
       });
       return authenticatedUser;
@@ -95,6 +94,7 @@ const UserContext = createContext<AuthContextProps | null>(null);
 
           await axios.delete("/api/delete-user", config);
           await deleteUser(user);
+          setUser(null);
         } else {
           alert("You must enter your password to delete your account.");
         }
