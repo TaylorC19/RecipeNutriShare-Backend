@@ -10,7 +10,9 @@ import {
   getAuth,
   User,
   EmailAuthProvider,
+  deleteUser
 } from "firebase/auth";
+import axios from "axios";
 
 import { User as firebaseAuthUser } from "firebase/auth";
 
@@ -20,7 +22,7 @@ interface AuthContextProps {
   logOut: () => Promise<any>;
   user: firebaseAuthUser | null;
   resetPasswordEmail: (email: string) => Promise<any>;
-  deleteUser: () => Promise<any>;
+  userDeletion: () => Promise<any>;
 }
 
 const UserContext = createContext<AuthContextProps | null>(null);
@@ -63,7 +65,7 @@ const UserContext = createContext<AuthContextProps | null>(null);
       return sendPasswordResetEmail(auth, email);
     };
 
-    const deleteUser = async () => {
+    const userDeletion = async () => {
       const currentAuth = getAuth();
       const user: User | null = currentAuth.currentUser;
 
@@ -73,23 +75,45 @@ const UserContext = createContext<AuthContextProps | null>(null);
       }
 
       try {
-        const userPassword: string | null = prompt("Please enter your password to delete your account:")
+        const userPassword: string | null = prompt(
+          "Please enter your password to delete your account:"
+        );
         if (userPassword) {
-          const credential = EmailAuthProvider.credential(user.email, userPassword);
+          const credential = EmailAuthProvider.credential(
+            user.email,
+            userPassword
+          );
 
           const currentUid = user.uid;
-        } else {
-          alert("You must enter your password to delete your account.")
-        }
+          const payload = {
+            uid: currentUid,
+          };
+          const config = {
+            method: "DELETE",
+            data: payload,
+          };
 
+          await axios.delete("/api/delete-user", config);
+          await deleteUser(user);
+        } else {
+          alert("You must enter your password to delete your account.");
+        }
       } catch (error) {
-        
+        // An error occurred
+        console.error(error);
       }
-    }
+    };
 
     return (
       <UserContext.Provider
-        value={{ createUser, loginUser, logOut, user, resetPasswordEmail, deleteUser }}
+        value={{
+          createUser,
+          loginUser,
+          logOut,
+          user,
+          resetPasswordEmail,
+          userDeletion,
+        }}
       >
         {children}
       </UserContext.Provider>
