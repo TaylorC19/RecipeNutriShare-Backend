@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
   getAuth,
   User,
+  EmailAuthProvider,
 } from "firebase/auth";
 
 import { User as firebaseAuthUser } from "firebase/auth";
@@ -74,7 +75,9 @@ const UserContext = createContext<AuthContextProps | null>(null);
       try {
         const userPassword: string | null = prompt("Please enter your password to delete your account:")
         if (userPassword) {
-          
+          const credential = EmailAuthProvider.credential(user.email, userPassword);
+
+          const currentUid = user.uid;
         } else {
           alert("You must enter your password to delete your account.")
         }
