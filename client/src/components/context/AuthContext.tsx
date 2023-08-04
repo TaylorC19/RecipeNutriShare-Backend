@@ -17,6 +17,7 @@ interface AuthContextProps {
   logOut: () => Promise<any>;
   user: firebaseAuthUser | null;
   resetPasswordEmail: (email: string) => Promise<any>;
+  deleteUser: () => Promise<any>;
 }
 
 const UserContext = createContext<AuthContextProps | null>(null);
@@ -58,6 +59,10 @@ const UserContext = createContext<AuthContextProps | null>(null);
     const resetPasswordEmail = async (email: string) => {
       return sendPasswordResetEmail(auth, email);
     };
+
+    const deleteUser = async () => {
+      
+    }
 
     return (
       <UserContext.Provider
