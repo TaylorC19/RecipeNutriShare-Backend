@@ -20,7 +20,7 @@ const Header: React.FC = () => {
   };
   
   /* eslint no-restricted-globals: "off" */
-  const handleDeletion = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleDeletion = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (confirm("Are you sure you want to delete your account?")) {
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
           "Warning: this cannot be undone. Are you sure you want to delete your account?"
         )
       ) {
-        userDeletion();
+        await userDeletion();
         navigate("/");
       }
     }
@@ -48,6 +48,7 @@ const Header: React.FC = () => {
           <button onClick={() => navigate("/new-recipe")}>New Recipe</button>
           <button onClick={() => navigate("/my-recipes")}>My Recipes</button>
           <button onClick={handleLogOut}>Log Out</button>
+          <button onClick={handleDeletion}>DELETE ACCOUNT</button>
         </div>
       ) : (
         <div className="navigate-items">
@@ -57,7 +58,6 @@ const Header: React.FC = () => {
           </button>
           <button onClick={() => navigate("/signin")}>Sign In</button>
           <button onClick={() => navigate("/signup")}>Sign Up</button>
-          <button onClick={handleDeletion}>DELETE ACCOUNT</button>
         </div>
       )}
     </nav>

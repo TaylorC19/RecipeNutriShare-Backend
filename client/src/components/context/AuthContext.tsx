@@ -7,10 +7,10 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
-  getAuth,
   User,
   EmailAuthProvider,
-  deleteUser
+  deleteUser,
+  reauthenticateWithCredential
 } from "firebase/auth";
 import axios from "axios";
 
@@ -65,12 +65,12 @@ const UserContext = createContext<AuthContextProps | null>(null);
     };
 
     const userDeletion = async () => {
-      const currentAuth = getAuth();
-      const user: User | null = currentAuth.currentUser;
+      const currentAuth = auth;
+      const userDelete: User | null = currentAuth.currentUser;
 
-      if (!user || !user.email) {
+      if (!userDelete || !userDelete.email) {
         // There is no authenticated user, handle this case accordingly
-        return "How did you hit this endpoint";
+        return console.log("How did you hit this endpoint");
       }
 
       try {
@@ -79,11 +79,16 @@ const UserContext = createContext<AuthContextProps | null>(null);
         );
         if (userPassword) {
           const credential = EmailAuthProvider.credential(
-            user.email,
+            userDelete.email,
             userPassword
           );
 
-          const currentUid = user.uid;
+          await reauthenticateWithCredential(
+            userDelete,
+            credential
+          );
+
+          const currentUid = userDelete.uid;
           const payload = {
             uid: currentUid,
           };
@@ -93,7 +98,7 @@ const UserContext = createContext<AuthContextProps | null>(null);
           };
 
           await axios.delete("/api/delete-user", config);
-          await deleteUser(user);
+          await deleteUser(userDelete);
           setUser(null);
         } else {
           alert("You must enter your password to delete your account.");
