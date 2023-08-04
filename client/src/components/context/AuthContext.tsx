@@ -7,6 +7,8 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  getAuth,
+  User,
 } from "firebase/auth";
 
 import { User as firebaseAuthUser } from "firebase/auth";
@@ -61,12 +63,20 @@ const UserContext = createContext<AuthContextProps | null>(null);
     };
 
     const deleteUser = async () => {
+      const currentAuth = getAuth();
+      const user: User | null = currentAuth.currentUser;
+
+      if (!user || !user.email) {
+        // There is no authenticated user, handle this case accordingly
+        return "How did you hit this endpoint";
+      }
+
       
     }
 
     return (
       <UserContext.Provider
-        value={{ createUser, loginUser, logOut, user, resetPasswordEmail }}
+        value={{ createUser, loginUser, logOut, user, resetPasswordEmail, deleteUser }}
       >
         {children}
       </UserContext.Provider>
