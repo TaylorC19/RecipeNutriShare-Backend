@@ -7,7 +7,12 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  User,
+  EmailAuthProvider,
+  deleteUser,
+  reauthenticateWithCredential
 } from "firebase/auth";
+import axios from "axios";
 
 import { User as firebaseAuthUser } from "firebase/auth";
 
@@ -17,6 +22,7 @@ interface AuthContextProps {
   logOut: () => Promise<any>;
   user: firebaseAuthUser | null;
   resetPasswordEmail: (email: string) => Promise<any>;
+  userDeletion: () => Promise<any>;
 }
 
 const UserContext = createContext<AuthContextProps | null>(null);
@@ -29,7 +35,6 @@ const UserContext = createContext<AuthContextProps | null>(null);
 
     useEffect(() => {
       const authenticatedUser = onAuthStateChanged(auth, (currentUser) => {
-        // console.log('🫡', currentUser);
         setUser(currentUser || null);
       });
       return authenticatedUser;
@@ -59,9 +64,61 @@ const UserContext = createContext<AuthContextProps | null>(null);
       return sendPasswordResetEmail(auth, email);
     };
 
+    const userDeletion = async () => {
+      const currentAuth = auth;
+      const userDelete: User | null = currentAuth.currentUser;
+
+      if (!userDelete || !userDelete.email) {
+        // There is no authenticated user, handle this case accordingly
+        return console.log("How did you hit this endpoint");
+      }
+
+      try {
+        const userPassword: string | null = prompt(
+          "Please enter your password to delete your account:"
+        );
+        if (userPassword) {
+          const credential = EmailAuthProvider.credential(
+            userDelete.email,
+            userPassword
+          );
+
+          await reauthenticateWithCredential(
+            userDelete,
+            credential
+          );
+
+          const currentUid = userDelete.uid;
+          const payload = {
+            uid: currentUid,
+          };
+          const config = {
+            method: "DELETE",
+            data: payload,
+          };
+
+          await axios.delete("/api/delete-user", config);
+          await deleteUser(userDelete);
+          setUser(null);
+        } else {
+          alert("You must enter your password to delete your account.");
+        }
+      } catch (error) {
+        // An error occurred
+        console.error(error);
+      }
+    };
+
     return (
       <UserContext.Provider
-        value={{ createUser, loginUser, logOut, user, resetPasswordEmail }}
+        value={{
+          createUser,
+          loginUser,
+          logOut,
+          user,
+          resetPasswordEmail,
+          userDeletion,
+        }}
       >
         {children}
       </UserContext.Provider>

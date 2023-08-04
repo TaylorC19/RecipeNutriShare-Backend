@@ -5,7 +5,7 @@ const nutrition = require("./utils/nutrition-api");
 const getRandomItem = require("./utils/getRandomItem");
 
 //routes
-const authRouter = require("./routes/user-auth");
+// const authRouter = require("./routes/user-auth");
 
 const apiHeader = {
   "x-app-id": process.env.X_APP_ID,
@@ -21,7 +21,7 @@ function setupServer() {
   app.use(express.static(path.resolve(__dirname, "../client/build")));
 
   //routes
-  app.use("/auth", authRouter);
+  // app.use("/auth", authRouter);
 
   // Add endpoints here
 
@@ -88,13 +88,11 @@ function setupServer() {
     const passcode = req.headers.passcode;
 
     if (passcode === process.env.MASTERCODE) {
-        const myRecipes = await knex("recipes")
-          .select()
-    
-        res.send(myRecipes);
+      const myRecipes = await knex("recipes").select();
 
+      res.send(myRecipes);
     } else {
-        res.send("Wrong Code")
+      res.send("Wrong Code");
     }
   });
 
@@ -133,6 +131,18 @@ function setupServer() {
       }
     }
   );
+
+  app.delete("/api/delete-user", async (req, res) => {
+    const uid = req.body.uid;
+
+    try {
+      await knex("recipes").where({ user_uid: uid }).del();
+      res.send(true);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(false);
+    }
+  });
 
   return app;
 }
