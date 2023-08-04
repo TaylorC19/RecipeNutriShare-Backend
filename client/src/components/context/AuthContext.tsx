@@ -71,7 +71,17 @@ const UserContext = createContext<AuthContextProps | null>(null);
         return "How did you hit this endpoint";
       }
 
-      
+      try {
+        const userPassword: string | null = prompt("Please enter your password to delete your account:")
+        if (userPassword) {
+          
+        } else {
+          alert("You must enter your password to delete your account.")
+        }
+
+      } catch (error) {
+        
+      }
     }
 
     return (
