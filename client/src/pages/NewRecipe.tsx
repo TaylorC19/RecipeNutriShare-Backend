@@ -35,7 +35,7 @@ const NewRecipe = () => {
         })
         .join(", ");
 
-      const recipePayload = {
+      const recipePayload: recipeInfoType = {
         title: recipeInfo.title,
         servings: recipeInfo.servings || "1",
         hours: recipeInfo.hours || "0",

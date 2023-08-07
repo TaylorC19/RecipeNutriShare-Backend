@@ -20,7 +20,7 @@ function PublicRecipes() {
     description: "",
     instructions: "",
     ingredients: [],
-    in_public: false,
+    is_public: false,
     total_calories: 0,
     total_protein: 0,
     total_carbohydrates: 0,

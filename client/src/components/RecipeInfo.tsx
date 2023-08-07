@@ -10,18 +10,6 @@ interface PropsInterface {
 function RecipeInfo(props:PropsInterface) {
   const { recipeInfo, setRecipeInfo } = props;
 
-  /*
-  {
-    title: "",
-    servings: "",
-    hours: "",
-    minutes: "",
-    description: "",
-    instructions: "",
-    is_public: false
-  } 
-  */
-
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputData = { ...recipeInfo };
     // const inputData = recipeInfo; // how are these different?
