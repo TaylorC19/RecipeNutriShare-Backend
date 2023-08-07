@@ -1,21 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SingleRecipe.css";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
 import axios from "axios";
-import { ingrObj, singleRecipeObj } from "../global.t";
+import { ingrObj, recipeInfoType, singleRecipeObj } from "../global.t";
 
 interface PropsInterface {
-  singleRecipe: singleRecipeObj,
-  setIsDefaultView?: ((value:boolean) => void)
+  singleRecipe: singleRecipeObj;
+  setIsDefaultView?: (value: boolean) => void;
 }
 
-function SingleRecipe(props:PropsInterface) {
+// const [ingredientsArr, setIngredientsArr] = useState<
+//   { name: string; quantity: string; unit: string }[]
+// >([{ name: "", quantity: "", unit: "" }]);
+// const [recipeInfo, setRecipeInfo] = useState<recipeInfoType>({
+//   title: "",
+//   servings: "",
+//   hours: "",
+//   minutes: "",
+//   description: "",
+//   instructions: "",
+//   is_public: false,
+// });
+
+function SingleRecipe(props: PropsInterface) {
   const { singleRecipe, setIsDefaultView } = props;
+  const [isEditView, setIsEditView] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const navigate = useNavigate();
   const { user } = UserAuth();
 
-  return (
+  const recipeInfo: recipeInfoType = {
+    title: singleRecipe.title,
+    servings: singleRecipe.servings.toString(),
+    hours: singleRecipe.hours.toString(),
+    minutes: singleRecipe.minutes.toString(),
+    description: singleRecipe.description,
+    instructions: singleRecipe.instructions,
+    is_public: singleRecipe.is_public,
+  };
+
+  return !isEditView ? (
     <div className="contents-div">
       <h2>Title: {singleRecipe.title}</h2>
       <div className="nutrition-info">
@@ -39,29 +64,37 @@ function SingleRecipe(props:PropsInterface) {
         <div className="ingredients">
           <p>Ingredients:</p>
           <ul>
-            {singleRecipe.ingredients.map((ingredient:ingrObj, index:number) => {
-              return (
-                <li className="single-ingredient" key={index}>
-                  {ingredient.quantity} {ingredient.unit} {ingredient.name} (
-                  {ingredient.calories} calories)
-                </li>
-              );
-            })}
+            {singleRecipe.ingredients.map(
+              (ingredient: ingrObj, index: number) => {
+                return (
+                  <li className="single-ingredient" key={index}>
+                    {ingredient.quantity} {ingredient.unit} {ingredient.name} (
+                    {ingredient.calories} calories)
+                  </li>
+                );
+              }
+            )}
           </ul>
         </div>
 
         <div className="recipe-info">
           <p>Description: {singleRecipe.description}</p>
           <p>Instructions:</p>
-          {singleRecipe.instructions.split("\n").map((element:string, index:number) => {
-            return <p key={index} className="instructions-p">{element}</p>;
-          })}
+          {singleRecipe.instructions
+            .split("\n")
+            .map((element: string, index: number) => {
+              return (
+                <p key={index} className="instructions-p">
+                  {element}
+                </p>
+              );
+            })}
         </div>
       </div>
       {setIsDefaultView ? (
         <div>
           <button
-          className="margin-right"
+            className="margin-right"
             onClick={(e) => {
               e.preventDefault();
               setIsDefaultView(true);
@@ -69,8 +102,7 @@ function SingleRecipe(props:PropsInterface) {
           >
             Back to all recipes
           </button>
-          {
-          user?.uid === singleRecipe.user_uid ? ( // button to delete a recipe
+          {user?.uid === singleRecipe.user_uid ? ( // button to delete a recipe
             <button
               className="margin-right"
               onClick={async (e) => {
@@ -116,6 +148,29 @@ function SingleRecipe(props:PropsInterface) {
         </div>
       )}
     </div>
+  ) : isSubmitted ? (
+    <h2>Thank you for submitting a recipe, checkout "My Recipes" to see it.</h2>
+  ) : (
+    <></>
+    // currently commented out while I build edit recipe endpoint
+    // <div>
+    //   <h1>New Recipe</h1>
+    //   <form onSubmit={handleSubmit}>
+    //     <div className="form-container">
+    //       <Ingredients
+    //         ingredientsArr={ingredientsArr}
+    //         setIngredientsArr={setIngredientsArr}
+    //       ></Ingredients>
+    //       <RecipeInfo
+    //         recipeInfo={recipeInfo}
+    //         setRecipeInfo={setRecipeInfo}
+    //       ></RecipeInfo>
+    //     </div>
+    //     <button className="btn right" type="submit">
+    //       Submit new recipe
+    //     </button>
+    //   </form>
+    // </div>
   );
 }
 
