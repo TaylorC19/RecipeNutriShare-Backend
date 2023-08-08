@@ -78,10 +78,10 @@ function setupServer() {
     const requestQuery = {
       query: query,
     };
-
+    
     try {
       const nutritionInfo = await nutrition(requestQuery, apiHeader);
-
+      
       const updateRecipe = {
         user_uid: uid,
         ...recipeInfo,
@@ -92,10 +92,13 @@ function setupServer() {
         calories_per_serving:
           nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings,
       };
-
+      
+      // console.log("✅ hit edit recipe endpoint")
       const writeRecipe = await knex("recipes")
-        .where("id", "=", id)
+        .where('id', '=', id)
         .update(updateRecipe);
+
+      res.status(200).send(true);
     } catch (error) {
       console.error(error);
       res.status(400).send(false);

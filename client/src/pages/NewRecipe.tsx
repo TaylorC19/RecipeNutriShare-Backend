@@ -44,15 +44,16 @@ const NewRecipe = () => {
         instructions: recipeInfo.instructions,
         is_public: recipeInfo.is_public,
       };
-
+      
       setRecipeInfo(recipePayload);
-
+      
       const queryBody = {
         query: ingredientsStr,
         uid: user?.uid,
         recipeInfo: recipePayload,
       };
 
+      // console.log(queryBody)
       await axios.post("/api/recipe", queryBody);
 
       setIsSubmitted(true);
