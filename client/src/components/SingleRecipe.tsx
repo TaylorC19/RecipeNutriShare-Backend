@@ -118,7 +118,7 @@ function SingleRecipe(props: PropsInterface) {
                         `/api/delete-recipe/user/${user.uid}/recipe/${singleRecipe.id}`
                       );
                       if (request) {
-                        navigate("/my-recipes");
+                        navigate("/");
                       } else {
                         alert("Recipe could not be deleted.");
                       }
