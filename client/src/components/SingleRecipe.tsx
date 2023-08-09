@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SingleRecipe.css";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./context/AuthContext";
 import axios from "axios";
 import { ingrObj, recipeInfoType, singleRecipeObj } from "../global.t";
+import Ingredients from "./Ingredients";
+import RecipeInfo from "./RecipeInfo";
+
 
 interface PropsInterface {
   singleRecipe: singleRecipeObj;
@@ -27,8 +30,30 @@ function SingleRecipe(props: PropsInterface) {
   const { singleRecipe, setIsDefaultView } = props;
   const [isEditView, setIsEditView] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [ingredientsArr, setIngredientsArr] = useState<{ name: string; quantity: string; unit: string }[]>([]);
+
   const navigate = useNavigate();
   const { user } = UserAuth();
+
+  useEffect(() => {
+    const ingredients: { name: string; quantity: string; unit: string }[] = [
+      ...ingredientsArr,
+    ];
+
+    singleRecipe.ingredients.forEach((element) => {
+      const ingredient: { name: string; quantity: string; unit: string } = {
+        name: element.name,
+        quantity: element.quantity.toString(),
+        unit: element.unit,
+      };
+
+      ingredients.push(ingredient)
+    })
+
+    setIngredientsArr(ingredients);
+  }, [singleRecipe.ingredients])
+  
+  // console.log(ingredientsArr);
 
   const recipeInfo: recipeInfoType = {
     title: singleRecipe.title,
