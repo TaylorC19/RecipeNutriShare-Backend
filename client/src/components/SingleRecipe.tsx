@@ -156,34 +156,43 @@ function SingleRecipe(props: PropsInterface) {
             Back to all recipes
           </button>
           {user?.uid === singleRecipe.user_uid ? ( // button to delete a recipe
-            <button
-              className="margin-right"
-              onClick={async (e) => {
-                e.preventDefault();
-                if (user) {
-                  try {
-                    if (
-                      window.confirm(
-                        "Are you sure you want to delete this recipe?"
-                      )
-                    ) {
-                      const request = await axios.delete(
-                        `/api/delete-recipe/user/${user.uid}/recipe/${singleRecipe.id}`
-                      );
-                      if (request) {
-                        navigate("/");
-                      } else {
-                        alert("Recipe could not be deleted.");
+            <div className="margin-right">
+              <button
+                onClick={() => {
+                  setIsEditView(!isEditView);
+                }}
+              >
+                edit recipe
+              </button>
+              <button
+                className="margin-right"
+                onClick={async (e) => {
+                  e.preventDefault();
+                  if (user) {
+                    try {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to delete this recipe?"
+                        )
+                      ) {
+                        const request = await axios.delete(
+                          `/api/delete-recipe/user/${user.uid}/recipe/${singleRecipe.id}`
+                        );
+                        if (request) {
+                          navigate("/");
+                        } else {
+                          alert("Recipe could not be deleted.");
+                        }
                       }
+                    } catch (error) {
+                      alert("Recipe could not be deleted.");
                     }
-                  } catch (error) {
-                    alert("Recipe could not be deleted.");
                   }
-                }
-              }}
-            >
-              Delete
-            </button>
+                }}
+              >
+                Delete
+              </button>
+            </div>
           ) : (
             <></>
           )}
@@ -204,26 +213,26 @@ function SingleRecipe(props: PropsInterface) {
   ) : isSubmitted ? (
     <h2>Your recipe has been updated, checkout "My Recipes" to see it.</h2>
   ) : (
-    <></>
+    // <></>
     // currently commented out while I build edit recipe endpoint
-    // <div>
-    //   <h1>New Recipe</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <div className="form-container">
-    //       <Ingredients
-    //         ingredientsArr={ingredientsArr}
-    //         setIngredientsArr={setIngredientsArr}
-    //       ></Ingredients>
-    //       <RecipeInfo
-    //         recipeInfo={recipeInfo}
-    //         setRecipeInfo={setRecipeInfo}
-    //       ></RecipeInfo>
-    //     </div>
-    //     <button className="btn right" type="submit">
-    //       Submit new recipe
-    //     </button>
-    //   </form>
-    // </div>
+    <div>
+      <h1>New Recipe</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-container">
+          <Ingredients
+            ingredientsArr={ingredientsArr}
+            setIngredientsArr={setIngredientsArr}
+          ></Ingredients>
+          <RecipeInfo
+            recipeInfo={recipeInfo}
+            setRecipeInfo={setRecipeInfo}
+          ></RecipeInfo>
+        </div>
+        <button className="btn right" type="submit">
+          Submit new recipe
+        </button>
+      </form>
+    </div>
   );
 }
 

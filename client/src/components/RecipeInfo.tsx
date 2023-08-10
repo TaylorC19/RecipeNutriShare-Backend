@@ -105,7 +105,7 @@ function RecipeInfo(props:PropsInterface) {
           placeholder="Add a desciption for your recipe"
           name="description"
           id="desciption"
-         
+          value={recipeInfo.description}
           rows={10}
         ></textarea>
       </div>
@@ -117,7 +117,7 @@ function RecipeInfo(props:PropsInterface) {
           placeholder="Add the instructions for your recipe"
           name="instructions"
           id="instructions"
-          
+          value={recipeInfo.instructions}
           rows={10}
         ></textarea>
       </div>
