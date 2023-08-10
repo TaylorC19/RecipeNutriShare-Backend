@@ -13,24 +13,20 @@ interface PropsInterface {
   setIsDefaultView?: (value: boolean) => void;
 }
 
-// const [ingredientsArr, setIngredientsArr] = useState<
-//   { name: string; quantity: string; unit: string }[]
-// >([{ name: "", quantity: "", unit: "" }]);
-// const [recipeInfo, setRecipeInfo] = useState<recipeInfoType>({
-//   title: "",
-//   servings: "",
-//   hours: "",
-//   minutes: "",
-//   description: "",
-//   instructions: "",
-//   is_public: false,
-// });
-
 function SingleRecipe(props: PropsInterface) {
   const { singleRecipe, setIsDefaultView } = props;
   const [isEditView, setIsEditView] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [ingredientsArr, setIngredientsArr] = useState<{ name: string; quantity: string; unit: string }[]>([]);
+  const [recipeInfo, setRecipeInfo] = useState<recipeInfoType>({
+    title: singleRecipe.title,
+    servings: singleRecipe.servings.toString(),
+    hours: singleRecipe.hours.toString(),
+    minutes: singleRecipe.minutes.toString(),
+    description: singleRecipe.description,
+    instructions: singleRecipe.instructions,
+    is_public: singleRecipe.is_public,
+  });
 
   const navigate = useNavigate();
   const { user } = UserAuth();
@@ -55,14 +51,46 @@ function SingleRecipe(props: PropsInterface) {
   
   // console.log(ingredientsArr);
 
-  const recipeInfo: recipeInfoType = {
-    title: singleRecipe.title,
-    servings: singleRecipe.servings.toString(),
-    hours: singleRecipe.hours.toString(),
-    minutes: singleRecipe.minutes.toString(),
-    description: singleRecipe.description,
-    instructions: singleRecipe.instructions,
-    is_public: singleRecipe.is_public,
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const ingredientsStr = ingredientsArr
+        .map((ingredient) => {
+          let string = `${ingredient.quantity} ${ingredient.unit} ${ingredient.name}`;
+          return string;
+        })
+        .join(", ");
+
+      const recipePayload: recipeInfoType = {
+        title: recipeInfo.title,
+        servings: recipeInfo.servings || "1",
+        hours: recipeInfo.hours || "0",
+        minutes: recipeInfo.minutes || "0",
+        description: recipeInfo.description,
+        instructions: recipeInfo.instructions,
+        is_public: recipeInfo.is_public,
+      };
+
+      setRecipeInfo(recipePayload);
+
+      const queryBody = {
+        id: singleRecipe.id,
+        query: ingredientsStr,
+        uid: user?.uid,
+        recipeInfo: recipePayload,
+      };
+
+      // console.log(queryBody)
+      await axios.put("/api/recipe", queryBody);
+
+      setIsSubmitted(true);
+    } catch (error) {
+      alert(
+        "Your recipe could not be saved, please check that you are signed in and filled in the recipe correctly and try again."
+      );
+    }
   };
 
   return !isEditView ? (
@@ -174,7 +202,7 @@ function SingleRecipe(props: PropsInterface) {
       )}
     </div>
   ) : isSubmitted ? (
-    <h2>Thank you for submitting a recipe, checkout "My Recipes" to see it.</h2>
+    <h2>Your recipe has been updated, checkout "My Recipes" to see it.</h2>
   ) : (
     <></>
     // currently commented out while I build edit recipe endpoint
