@@ -17,7 +17,7 @@ export interface singleRecipeObj {
   description: string
   instructions: string,
   ingredients: ingrObj[],
-  in_public: boolean,
+  is_public: boolean,
   total_calories: number,
   total_protein: number,
   total_carbohydrates: number,

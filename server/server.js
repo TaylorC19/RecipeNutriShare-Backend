@@ -73,6 +73,38 @@ function setupServer() {
     }
   });
 
+  app.put("/api/recipe", async (req, res) => {
+    const { id, uid, query, recipeInfo } = req.body;
+    const requestQuery = {
+      query: query,
+    };
+    
+    try {
+      const nutritionInfo = await nutrition(requestQuery, apiHeader);
+      
+      const updateRecipe = {
+        user_uid: uid,
+        ...recipeInfo,
+        ingredients: JSON.stringify(nutritionInfo.ingredientsArr),
+        total_calories: nutritionInfo.nutritionObj.totalCalories,
+        total_protein: nutritionInfo.nutritionObj.totalProtein,
+        total_carbohydrates: nutritionInfo.nutritionObj.totalCarbohydrates,
+        calories_per_serving:
+          nutritionInfo.nutritionObj.totalCalories / recipeInfo.servings,
+      };
+      
+      // console.log("✅ hit edit recipe endpoint")
+      const writeRecipe = await knex("recipes")
+        .where('id', '=', id)
+        .update(updateRecipe);
+
+      res.status(200).send(true);
+    } catch (error) {
+      console.error(error);
+      res.status(400).send(false);
+    }
+  });
+
   app.get("/api/recipes/:uid", async (req, res) => {
     const uid = req.params.uid;
 
