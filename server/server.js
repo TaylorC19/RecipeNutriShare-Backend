@@ -18,7 +18,6 @@ function setupServer() {
   const app = express();
 
   app.use(express.json());
-  app.use(express.static(path.resolve(__dirname, "../client/build")));
 
   //routes
   // app.use("/auth", authRouter);
