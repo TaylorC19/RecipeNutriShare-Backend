@@ -28,7 +28,7 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: process.env.POSTGRES_URL,
+    connection: process.env.POSTGRES_URL + "?sslmode=require",
     searchPath: 'public',
     pool: {
       min: 2,
