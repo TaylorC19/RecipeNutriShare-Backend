@@ -11,7 +11,7 @@ require("dotenv").config(
 module.exports = {
   development: {
     client: "pg",
-    connection: {
+    connection: POSTGRES_URL || {
       host: process.env.DB_HOST || "127.0.0.1",
       port: process.env.DB_PORT || 5432,
       database: process.env.DB_NAME,
@@ -28,7 +28,7 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: process.env.POSTGRES_URL,
     searchPath: 'public',
     pool: {
       min: 2,
