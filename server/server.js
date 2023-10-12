@@ -24,6 +24,10 @@ function setupServer() {
 
   // Add endpoints here
 
+  api.get("/", (req, res) => {
+    res.send("This is the backend to RecipeNutriShare.")
+  })
+
   app.get("/api/hello", (req, res) => {
     res.send("world");
   });
