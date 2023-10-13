@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server/index.js",
-      "use": "@now/node"
-    }
-  ],
   "routes": [
     { "src": "/", "dest": "server/index.js" },
     { "src": "/nutrition/info", "dest": "server/index.js" },
