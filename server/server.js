@@ -3,6 +3,7 @@ const path = require("path");
 const knex = require("../db/knex");
 const nutrition = require("./utils/nutrition-api");
 const getRandomItem = require("./utils/getRandomItem");
+import cors from "cors"
 
 //routes
 // const authRouter = require("./routes/user-auth");
@@ -18,6 +19,7 @@ function setupServer() {
   const app = express();
 
   app.use(express.json());
+  app.use(cors());
   app.use(express.static("public"));
 
   //routes
