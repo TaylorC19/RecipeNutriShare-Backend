@@ -18,14 +18,15 @@ function setupServer() {
   const app = express();
 
   app.use(express.json());
+  app.use(express.static("public"));
 
   //routes
   // app.use("/auth", authRouter);
 
   // Add endpoints here
 
-  api.get("/", (req, res) => {
-    res.send("This is the backend to RecipeNutriShare.")
+  app.get("/", (req, res) => {
+    res.sendFile("index.html", { root: path.join(__dirname, "public") });
   })
 
   app.get("/api/hello", (req, res) => {
