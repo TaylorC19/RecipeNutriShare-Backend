@@ -1,13 +1,15 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
-    { "src": "/", "dest": "server/index.js" },
-    { "src": "/nutrition/info", "dest": "server/index.js" },
-    { "src": "/api/recipe", "dest": "server/index.js" },
-    { "src": "/api/all-recipes", "dest": "server/index.js" },
-    { "src": "/api/public-recipes", "dest": "server/index.js" },
-    { "src": "/api/random-recipe", "dest": "server/index.js" },
-    { "src": "/api/delete-recipe/user", "dest": "server/index.js" },
-    { "src": "/api/delete-user", "dest": "server/index.js" }
+    {
+      "src": "/(.*)",
+      "dest": "index.js"
+    }
   ]
 }
