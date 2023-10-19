@@ -1,21 +1,10 @@
-<h1 align="center">Welcome to Meal Prep Tracker 👋</h1>
-<p>
-  <a href="https://github.com/TaylorC19/meal-prep-tracker#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="https://github.com/TaylorC19/meal-prep-tracker/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-  <a href="https://github.com/TaylorC19/meal-prep-tracker/blob/master/LICENSE" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/github/license/TaylorC19/Meal Prep Tracker" />
-  </a>
-</p>
+<h1 align="center">Welcome to RecipeNutriShare 👋</h1>
 
 > This app allows users to create and share recipes while using NutritionIX API to automatically find nutrition information.
 
-### 🏠 [Homepage](https://github.com/TaylorC19/meal-prep-tracker#readme)
+### 🏠 [Homepage](https://github.com/TaylorC19/RecipeNutriShare-Frontend)
 
-### ✨ [Demo](https://meal-prep-tracker.onrender.com/)
+### ✨ [Demo](https://recipenutrishare.vercel.app/)
 
 ## Install
 
@@ -34,15 +23,10 @@ npm run build
 npm run start
 ```
 
-For development, you will need to activate the frontend and backend separately. The method I use is having two terminals open. 
+For development, you will need to run the following commands. 
 
 ```sh
 npm run dev
-```
-
-```sh
-cd client/
-npm run start
 ```
 
 ## Run tests
@@ -59,7 +43,8 @@ npm run test
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/TaylorC19/meal-prep-tracker/issues). You can also take a look at the [contributing guide](https://github.com/TaylorC19/meal-prep-tracker/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/TaylorC19/RecipeNutriShare-Backend/issues). 
+<!-- (WIP) You can also take a look at the [contributing guide](https://github.com/TaylorC19/meal-prep-tracker/blob/master/CONTRIBUTING.md). -->
 
 ## Show your support
 
@@ -68,7 +53,6 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2023 [Taylor Crouch](https://github.com/TaylorC19).<br />
-This project is [ISC](https://github.com/TaylorC19/meal-prep-tracker/blob/master/LICENSE) licensed.
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
